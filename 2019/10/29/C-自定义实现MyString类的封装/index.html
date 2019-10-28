@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Carpe Diem">
 <meta property="og:description" content="前言学习C++也有一个多星期了，目前学过的主要内容有以下几个方面（未按先后顺序排列）：  函数重载 类的构造和析构 const操作符 引用 操作符重载  以上是最近学习的主要内容，下面通过实现一个自定义MyString类的封装来回顾一下所学内容。 一、 搭建类的框架我采用类的声明和类的实现分离的做法，因此这个类会有两个文件，其中MyString.hpp是类的声明，这里定义了类的成员变量和类的成员函">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-28T18:19:53.205Z">
+<meta property="og:updated_time" content="2019-10-28T18:22:24.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++自定义实现MyString类的封装">
 <meta name="twitter:description" content="前言学习C++也有一个多星期了，目前学过的主要内容有以下几个方面（未按先后顺序排列）：  函数重载 类的构造和析构 const操作符 引用 操作符重载  以上是最近学习的主要内容，下面通过实现一个自定义MyString类的封装来回顾一下所学内容。 一、 搭建类的框架我采用类的声明和类的实现分离的做法，因此这个类会有两个文件，其中MyString.hpp是类的声明，这里定义了类的成员变量和类的成员函">
@@ -195,7 +195,7 @@
 
 <h1 id="二、-MyString要实现的基础业务功能"><a href="#二、-MyString要实现的基础业务功能" class="headerlink" title="二、 MyString要实现的基础业务功能"></a>二、 MyString要实现的基础业务功能</h1><p>在实现功能之前先确定类的成员变量，之后实现功能我用调用方式来说明。</p>
 <h2 id="确定成员变量"><a href="#确定成员变量" class="headerlink" title="确定成员变量"></a>确定成员变量</h2><p>一个字符串首先必须有一个长度，其次就是字符串的内容，因此有了如下的变量声明，同时我们不希望类的内部实现被外界看到，也就是说，我们不希望用户直接对成员变量进行操作，因此这里定义成私有变量：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">				<span class="keyword">int</span> Length;</span><br><span class="line">				<span class="keyword">char</span> * ch;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> Length;</span><br><span class="line">	<span class="keyword">char</span> * ch;</span><br></pre></td></tr></table></figure>
 
 <h2 id="MyString-s"><a href="#MyString-s" class="headerlink" title="MyString s;"></a>MyString s;</h2><p>第一个应用场景就是声明一个变量</p>
 <h2 id="MyString-s-“abc”"><a href="#MyString-s-“abc”" class="headerlink" title="MyString  s = “abc”;"></a>MyString  s = “abc”;</h2><p>第二个场景是声明的同时初始化一个变量</p>
@@ -482,14 +482,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">操作符重载</a>
               </li>
              
@@ -506,11 +498,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">livere</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mob</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">livere</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
