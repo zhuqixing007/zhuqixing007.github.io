@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 学习笔记 | Carpe Diem</title>
+  <title>C++自定义实现MyString类的封装（二） | Carpe Diem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Carpe Diem">
-<meta property="og:url" content="http://yoursite.com/tags/学习笔记/index.html">
+  <meta name="description" content="前文回顾在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。 本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。 MySt">
+<meta name="keywords" content="面向对象,操作符重载,友元函数,对象的构造和析构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++自定义实现MyString类的封装（二）">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/C-自定义实现MyString类的封装（二）/index.html">
 <meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="前文回顾在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。 本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。 MySt">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-05T02:51:13.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Carpe Diem">
+<meta name="twitter:title" content="C++自定义实现MyString类的封装（二）">
+<meta name="twitter:description" content="前文回顾在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。 本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。 MySt">
   
     <link rel="alternative" href="/atom.xml" title="Carpe Diem" type="application/atom+xml">
   
@@ -149,36 +154,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-C-自定义实现MyString类的封装（二）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/22/C-对象的构造和析构/" class="archive-article-date">
-  	<time datetime="2019-10-22T05:04:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/22/C-对象的构造和析构/">初识C++对象的构造和析构</a>
+    <h1 class="article-title" itemprop="name">
+      C++自定义实现MyString类的封装（二）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/10/30/C-自定义实现MyString类的封装（二）/" class="archive-article-date">
+  	<time datetime="2019-10-29T23:44:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+  	    
+  	      <h1 id="前文回顾"><a href="#前文回顾" class="headerlink" title="前文回顾"></a>前文回顾</h1><p>在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。</p>
+<p>本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。</p>
+<h1 id="MyString类功能增强"><a href="#MyString类功能增强" class="headerlink" title="MyString类功能增强"></a>MyString类功能增强</h1><p>与前文相同，从功能的调用方式入手。</p>
+<h2 id="cout-lt-lt-s"><a href="#cout-lt-lt-s" class="headerlink" title="cout &lt;&lt; s;"></a>cout &lt;&lt; s;</h2><p>对象被创建以后，用户需要看到对象中的内容，所以我们就需要实现将s输出到屏幕上，看代码：</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp; s);</span><br><span class="line"><span class="comment">// 首先cout是一个输出流，他是一个ostream对象，所以接受的函数参数是一个ostream类型加一个MyString类型</span></span><br><span class="line"><span class="comment">// 其次如果你希望&lt;&lt;操作符支持链式编程，也就是可以这样调用:cout&lt;&lt;s&lt;&lt;"abc"&lt;&lt;endl,</span></span><br><span class="line"><span class="comment">// 那么你的返回类型也掩饰一个ostream对象</span></span><br><span class="line"><span class="comment">// 最后ostream类的源码，我们是不可见的，所以我们不能通过成员函数来实现操作符重载，</span></span><br><span class="line"><span class="comment">// 所以这里只能使用友元函数来实现，这也是友元函数的最大用武之地</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现非常简单，只要把s的值传递给ostream对象，然后返回就可以了</span></span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp;s) &#123;</span><br><span class="line">    out&lt;&lt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="cin-gt-gt-s"><a href="#cin-gt-gt-s" class="headerlink" title="cin &gt;&gt; s;"></a>cin &gt;&gt; s;</h2><p>从键盘键入内容传递给对象也是一个基本的业务，实现方式和cout类似，因此不做过多说明了</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp; s);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp;s) &#123;</span><br><span class="line">    in&gt;&gt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="s-i"><a href="#s-i" class="headerlink" title="s[i];"></a>s[i];</h2><p>根据索引获取对象的值，需要对[]操作符进行重载</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span>;</span><br><span class="line"><span class="comment">// 返回的值一个字符，所以函数的返回类型为char，索引是int型，同时不希望对象被改变，所以用const</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> MyString::<span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> ch[i]; <span class="comment">//直接返回ch的索引</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="s-“abc”-s1-s2"><a href="#s-“abc”-s1-s2" class="headerlink" title="s == “abc”; s1 == s2;"></a>s == “abc”; s1 == s2;</h2><p>判断是否相等有两种情况，一是判断一个对象是否和一个字符串相等，一是判断两个对象是否相等</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span> *p) <span class="keyword">const</span>;</span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//都是一些比较简单的业务逻辑</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span>*p) <span class="keyword">const</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length == <span class="number">0</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != <span class="built_in">strlen</span>(p))&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">      <span class="comment">//strcmp(s1,s2)   s1=s2返回0，s1&gt;s2返回大于0的值，s1&lt;s2返回小于0的值</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != s.Length)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="完整施工"><a href="#完整施工" class="headerlink" title="完整施工"></a>完整施工</h1><p>接下来还有一部分操作符重载，远离都类似就不再展开细讲了，下面给出封装完成的MyString类：</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*实现自定义字符串类*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MyString_hpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MyString_hpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyString</span> &#123;</span></span><br><span class="line">   </span><br><span class="line"><span class="comment">//私有成员变量</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> Length;</span><br><span class="line">    <span class="keyword">char</span> * ch;   </span><br><span class="line">    </span><br><span class="line"><span class="comment">//构造和析构</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyString(<span class="keyword">int</span> length = <span class="number">0</span>);<span class="comment">//对象内存空间分配构造函数 </span></span><br><span class="line">    MyString(<span class="keyword">const</span> <span class="keyword">char</span> *p);<span class="comment">//对象初始化构造函数 </span></span><br><span class="line">    MyString(<span class="keyword">const</span> MyString &amp;obj);<span class="comment">//拷贝构造函数  </span></span><br><span class="line">    ~MyString();<span class="comment">//析构函数  </span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//成员函数</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>;<span class="comment">//返回长度   </span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> * <span class="title">c_str</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">char</span> * <span class="title">c_str</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数实现的操作符重载</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">char</span> <span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span>;<span class="comment">//[]操作符   </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span> * p) <span class="keyword">const</span>;  <span class="comment">//==操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> <span class="keyword">char</span> * p) <span class="keyword">const</span>;<span class="comment">// !=操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&gt;(MyString &amp; s);<span class="comment">// &gt;操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&gt;(<span class="keyword">const</span> <span class="keyword">char</span> * p);</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(MyString &amp; s);<span class="comment">// &lt;操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> <span class="keyword">char</span> * p);</span><br><span class="line">    MyString &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> *p); <span class="comment">//=操作符 字符串赋值 </span></span><br><span class="line">    MyString &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> MyString &amp; s); <span class="comment">//=操作符 用一个对象给另一个对象赋值 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//友元函数实现的操作符重载</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp; s); <span class="comment">// &lt;&lt;操作符  </span></span><br><span class="line">    <span class="keyword">friend</span> istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp; s); <span class="comment">//  &gt;&gt;操作符  </span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* MyString_hpp */</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MyString.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造和析构函数======================================================</span></span><br><span class="line">MyString::MyString(<span class="keyword">int</span> length) &#123;</span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = length;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::MyString(<span class="keyword">const</span> <span class="keyword">char</span> *p) &#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(p);</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::MyString(<span class="keyword">const</span> MyString &amp;obj) &#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;Length = obj.Length;</span><br><span class="line">    <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[Length + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, obj.ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MyString::~MyString() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>-&gt;ch != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] <span class="keyword">this</span>-&gt;ch;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//cout&lt;&lt;"对象"&lt;&lt;this&lt;&lt;"析构完成"&lt;&lt;endl;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构造和析构函数======================================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数===========================================================</span></span><br><span class="line"><span class="keyword">int</span> MyString::length() &#123;</span><br><span class="line">    <span class="keyword">return</span> Length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * MyString::c_str()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * MyString::c_str() <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员函数===========================================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数实现的操作符重载==============================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// []操作符重载</span></span><br><span class="line"><span class="keyword">char</span> MyString::<span class="keyword">operator</span>[](<span class="keyword">int</span> i)  <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ch[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ==操作符重载 调用方式：s == "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span>* p) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != <span class="built_in">strlen</span>(p))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">        <span class="comment">//strcmp(s1,s2)相等返回为0，s1 若大于s2 则返回大于0 的值。s1 若小于s2 则返回小于0 的值。</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//return true;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ==操作符重载 调用方式：s1 == s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != s.Length)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// !=操作符重载 调用方式：s1 != "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>!=(<span class="keyword">const</span> <span class="keyword">char</span>* p) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(*<span class="keyword">this</span> == p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 操作符重载 调用方式：s1 != s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>!=(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(*<span class="keyword">this</span> == s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &gt;操作符重载 调用方式：s1 &gt; s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&gt;(MyString &amp; s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &gt;操作符重载 调用方式：s1 &gt; "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&gt;(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &lt;操作符重载 调用方式：s1 &lt; s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&lt;(MyString &amp; s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &lt;操作符重载 调用方式：s1 &lt; "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&lt;(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// =操作符重载 调用方式：s1 = "abc"</span></span><br><span class="line">MyString &amp; MyString::<span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;ch != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] <span class="keyword">this</span>-&gt;ch;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(p);</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// =操作符重载 调用方式：s1 = s2</span></span><br><span class="line">MyString &amp; MyString::<span class="keyword">operator</span>=(<span class="keyword">const</span> MyString &amp; s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;ch != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] <span class="keyword">this</span>-&gt;ch;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">this</span>-&gt;Length = s.Length ;</span><br><span class="line">    <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, s.ch);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员函数实现的操作符重载==============================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//友元函数实现的操作符重载==============================================</span></span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp;s) &#123;</span><br><span class="line">    out&lt;&lt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp;s) &#123;</span><br><span class="line">    in&gt;&gt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员函数实现的操作符重载==============================================</span></span><br></pre></td></tr></table></figure>
+
+
+  	    
+      
+
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -188,13 +253,21 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">操作符重载</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">友元函数</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">对象的构造和析构</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -207,17 +280,119 @@
 	</div>
 
 
+      
+
+      <span id="busuanzi_container_page_pv" style="color: #b0a0aa;font-size: 14px;">
+          阅读量: <span id="busuanzi_value_page_pv"></span>
+      </span>
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=2c9c8a3e6fd92"></script>
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="-mob-share-weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="-mob-share-weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="-mob-share-qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="-mob-share-qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/29/C-自定义实现MyString类的封装（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++自定义实现MyString类的封装(一)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前文回顾"><span class="toc-number">1.</span> <span class="toc-text">前文回顾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyString类功能增强"><span class="toc-number">2.</span> <span class="toc-text">MyString类功能增强</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cout-lt-lt-s"><span class="toc-number">2.1.</span> <span class="toc-text">cout &lt;&lt; s;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cin-gt-gt-s"><span class="toc-number">2.2.</span> <span class="toc-text">cin &gt;&gt; s;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#s-i"><span class="toc-number">2.3.</span> <span class="toc-text">s[i];</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#s-“abc”-s1-s2"><span class="toc-number">2.4.</span> <span class="toc-text">s == “abc”; s1 == s2;</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完整施工"><span class="toc-number">3.</span> <span class="toc-text">完整施工</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div class="livere">
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NjgzMi8yMzMzMw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+</div>
+<!-- City版安装代码已完成 -->
+<style>
+.livere{
+    padding: 0 30px;
+  }
+</style>
 
 
           </div>
@@ -240,9 +415,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
