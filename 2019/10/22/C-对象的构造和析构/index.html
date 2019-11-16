@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记,面向对象,">
+  <meta name="keywords" content="面向对象,学习笔记,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="前言创建一个对象时常常需要某些初始化工作，例如对成员变量的赋值等，但是类的成员变量不能在声明的时候赋值；同样的，在对象被销毁的时候也需要执行某些自动化操作，因此就有了对象的构造和析构函数。 1. 构造函数1.1 概念函数名和类相同的特殊成员函数，并且没有任何返回类型的声明。 1.2 调用 编译器自动调用 手动调用  2. 析构函数2.1 定义用于清理对象，没有返回类型声明，函数名为~ClassNa">
-<meta name="keywords" content="学习笔记,面向对象">
+<meta name="keywords" content="面向对象,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识C++对象的构造和析构">
 <meta property="og:url" content="http://yoursite.com/2019/10/22/C-对象的构造和析构/index.html">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -337,9 +337,6 @@
             <span class="post-meta-divider">|</span>
             <span class="page-pv"><i class="fa fa-file-o"></i>
             <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            <span id="busuanzi_container_site_uv">
-  本站访客数<span id="busuanzi_value_site_uv"></span>人次
-</span>
             </span>
           
 
@@ -387,9 +384,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
             <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
         </div>
       
@@ -524,6 +521,22 @@
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhuqixing007" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhuqixing123@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
 
           
           
@@ -583,6 +596,7 @@
 
 
 
+
         
 <div class="busuanzi-count">
   <script async src="“https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js”"></script>
@@ -622,6 +636,12 @@
       </div>
     
 
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
     
 
   </div>
@@ -762,8 +782,48 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
   
 
   
