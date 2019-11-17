@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="面向对象,学习笔记,">
+  <meta name="keywords" content="学习笔记,面向对象,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="前言创建一个对象时常常需要某些初始化工作，例如对成员变量的赋值等，但是类的成员变量不能在声明的时候赋值；同样的，在对象被销毁的时候也需要执行某些自动化操作，因此就有了对象的构造和析构函数。 1. 构造函数1.1 概念函数名和类相同的特殊成员函数，并且没有任何返回类型的声明。 1.2 调用 编译器自动调用 手动调用  2. 析构函数2.1 定义用于清理对象，没有返回类型声明，函数名为~ClassNa">
-<meta name="keywords" content="面向对象,学习笔记">
+<meta name="keywords" content="学习笔记,面向对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识C++对象的构造和析构">
 <meta property="og:url" content="https://zhuqixing007.github.io/2019/10/22/C-对象的构造和析构/index.html">
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -230,6 +230,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
 
       
         <li class="menu-item menu-item-search">
@@ -330,7 +340,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T15:58:00+08:00">
+                2019-10-22
+              </time>
             
           </span>
 
@@ -436,9 +458,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
-          
             <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
           
         </div>
       
@@ -529,6 +551,8 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
     
     <div class="sidebar-inner">
 
@@ -722,6 +746,8 @@ setInterval("createtime()",250);
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
