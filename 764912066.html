@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="面向对象,操作符重载,友元函数,对象的构造和析构,">
 
 
 
@@ -85,13 +85,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Carpe Diem">
-<meta property="og:url" content="https://zhuqixing007.github.io/tags/mob/index.html">
+<meta name="description" content="前言本文通过封装一个自定义的字符串类MyString来讲解C++面向对象的一些基础内容，主要涉及以下几个方面，知识讲解以代码注释为主，这样更容易理解：  函数重载 类的构造和析构 const操作符 引用 操作符重载  一、 搭建类的框架我采用类的声明和类的实现分离的做法，因此这个类会有两个文件，其中MyString.hpp是类的声明，这里定义了类的成员变量和类的成员函数。 MyString.hpp">
+<meta name="keywords" content="面向对象,操作符重载,友元函数,对象的构造和析构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++自定义实现MyString类的封装(一)">
+<meta property="og:url" content="https://zhuqixing007.github.io/764912066.html">
 <meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="前言本文通过封装一个自定义的字符串类MyString来讲解C++面向对象的一些基础内容，主要涉及以下几个方面，知识讲解以代码注释为主，这样更容易理解：  函数重载 类的构造和析构 const操作符 引用 操作符重载  一、 搭建类的框架我采用类的声明和类的实现分离的做法，因此这个类会有两个文件，其中MyString.hpp是类的声明，这里定义了类的成员变量和类的成员函数。 MyString.hpp">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-21T08:42:25.099Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Carpe Diem">
+<meta name="twitter:title" content="C++自定义实现MyString类的封装(一)">
+<meta name="twitter:description" content="前言本文通过封装一个自定义的字符串类MyString来讲解C++面向对象的一些基础内容，主要涉及以下几个方面，知识讲解以代码注释为主，这样更容易理解：  函数重载 类的构造和析构 const操作符 引用 操作符重载  一、 搭建类的框架我采用类的声明和类的实现分离的做法，因此这个类会有两个文件，其中MyString.hpp是类的声明，这里定义了类的成员变量和类的成员函数。 MyString.hpp">
 
 
 
@@ -121,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://zhuqixing007.github.io/tags/mob/">
+  <link rel="canonical" href="https://zhuqixing007.github.io/764912066.html">
 
 
 
 
 
-  <title>标签: mob | Carpe Diem</title>
+  <title>C++自定义实现MyString类的封装(一) | Carpe Diem</title>
   
 
 
@@ -146,7 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/zhuqixing007" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -284,52 +289,313 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>mob<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhuqixing007.github.io/764912066.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Postgraduate">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/imgs/personal_info/touxiang.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Carpe Diem">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/1625753387.html" itemprop="url">
-              
-                <span itemprop="name">hexo添加分享功能</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">C++自定义实现MyString类的封装(一)</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-29T13:33:20+08:00" content="2019-09-29">
-          09-29
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T01:12:25+08:00">
+                2019-10-29
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-21T16:42:25+08:00">
+                2019-11-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">C++学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>&nbsp&nbsp<span>阅读量:</span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文通过封装一个自定义的字符串类MyString来讲解C++面向对象的一些基础内容，主要涉及以下几个方面，知识讲解以代码注释为主，这样更容易理解：</p>
+<ul>
+<li>函数重载</li>
+<li>类的构造和析构</li>
+<li>const操作符</li>
+<li>引用</li>
+<li>操作符重载</li>
+</ul>
+<h1 id="一、-搭建类的框架"><a href="#一、-搭建类的框架" class="headerlink" title="一、 搭建类的框架"></a>一、 搭建类的框架</h1><p>我采用类的声明和类的实现分离的做法，因此这个类会有两个文件，其中MyString.hpp是类的声明，这里定义了类的成员变量和类的成员函数。</p>
+<h2 id="MyString-hpp"><a href="#MyString-hpp" class="headerlink" title="MyString.hpp"></a>MyString.hpp</h2><p>我使用的编译器是Xcode，其他编译器的后缀名是.h，关于.hpp和.h不是本文的重点，不作说明，感兴趣的可以自行查找相关文献。</p>
+<p>以下代码为新建一个类时，编译器自动生成代码，没有什么难点，因此只做部分注释。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MyString_hpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MyString_hpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once <span class="comment">// 防止头文件被重复引用，多次引用只有一次有效</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyString</span> &#123;</span></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">protected</span>:</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* MyString_hpp */</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MyString-cpp"><a href="#MyString-cpp" class="headerlink" title="MyString.cpp"></a>MyString.cpp</h2><p>同样由编译器自动生成，不过也可以手动创建，以下为编译器自动生成代码，只有一行，因为还没有做类的成员函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MyString.hpp"</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="二、-MyString要实现的基础业务需求"><a href="#二、-MyString要实现的基础业务需求" class="headerlink" title="二、 MyString要实现的基础业务需求"></a>二、 MyString要实现的基础业务需求</h1><p>在实现功能之前先确定类的成员变量，之后实现功能我用调用方式来说明。</p>
+<h2 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h2><p>一个字符串首先必须有一个长度，其次就是字符串的内容，因此有了如下的变量声明，同时我们不希望类的内部实现被外界看到，也就是说，我们不希望用户直接对成员变量进行操作，因此这里定义成私有变量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> Length;</span><br><span class="line">	<span class="keyword">char</span> * ch;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MyString-s"><a href="#MyString-s" class="headerlink" title="MyString s;"></a>MyString s;</h2><p>第一个应用场景就是声明一个变量，这里就需要开始对象的构造了，因此我们需要在MyString.hpp中定义构造函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyString(); <span class="comment">//在之前的文章里简单的讲解过构造函数和析构函数的语法：函数名和类名相同</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在MyString.cpp文件中实现该函数的业务逻辑：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyString::MyString()<span class="comment">//类的声明和实现分离语法   类名::函数名()&#123;函数体&#125;</span></span><br><span class="line">&#123;</span><br><span class="line">	Length = <span class="number">0</span>; <span class="comment">//声明时没有赋值，因此字符串的长度应该是0</span></span><br><span class="line">  ch = <span class="keyword">new</span> cahr * p[Length + <span class="number">1</span>]; <span class="comment">//分配内存，多分配一个长度，留给"/0"</span></span><br><span class="line">  <span class="built_in">strcpy</span>(ch, <span class="string">""</span>); <span class="comment">//这时候的字符串是一个空串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MyString-s-“abc”"><a href="#MyString-s-“abc”" class="headerlink" title="MyString  s = “abc”;"></a>MyString  s = “abc”;</h2><p>第二个场景是声明的同时初始化一个变量，同样是对象的构造：</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyString(<span class="keyword">const</span> <span class="keyword">char</span> * p); <span class="comment">//1.我们只是用一下传入的参数，为了防止意外错误，我们不希望这个参数被改变，因此定义成const</span></span><br><span class="line"><span class="comment">//2.同样是构造函数，因此函数名和类名相同，但是接受的参数不同，所以这里就是函数重载。要说明的是：函数重载的判断标准是函数的参数列表，并不是函数的返回类型</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Mystring.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MyString::MyString(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">  <span class="comment">//1. 传入的p可能是一个空值，如果是空值，那就和无参构造函数相同</span></span><br><span class="line">  <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    Length = <span class="number">0</span>; </span><br><span class="line">    ch = <span class="keyword">new</span> cahr * p[Length + <span class="number">1</span>]; </span><br><span class="line">    <span class="built_in">strcpy</span>(ch, <span class="string">""</span>); </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    Length = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(p); <span class="comment">//获取传入字符串长度</span></span><br><span class="line">    ch = <span class="keyword">new</span> <span class="keyword">char</span>[Length + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(ch, p);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MyString-s1-s2"><a href="#MyString-s1-s2" class="headerlink" title="MyString s1 = s2;"></a>MyString s1 = s2;</h2><p>第三个场景是用一个变量区初始化另一个变量，也是对象的构造，但这里是拷贝构造函数：</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyString(<span class="keyword">const</span> MyString &amp; obj); <span class="comment">//用一个对象初始化另一个对象，传入的参数应该是MyString对象，同时我们不需要对obj直接进行操作，也不希望obj在使用过程中被意外的改变，因此将obj定义为一个const引用，在用一个对象初始化另一个对象的时候，编译器就会自动调用拷贝构造函数</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyString::MyString(<span class="keyword">const</span> MyString &amp; obj)&#123;</span><br><span class="line">  <span class="comment">//这里用到了this指针，也可以不用，this指针指明了当前被操作的对象，他也是函数的一个参数，只不过没有显式的定义出来，在c++编译器的内部已经帮我们定义好了</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;Length = obj.Length; <span class="comment">//复制对象的长度</span></span><br><span class="line">  <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[Length + <span class="number">1</span>]; <span class="comment">//分配内存</span></span><br><span class="line">  <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, obj.ch); <span class="comment">//复制对象的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象的析构"><a href="#对象的析构" class="headerlink" title="对象的析构"></a>对象的析构</h2><p>在类封装完成之前，我们还不完全知道哪些地方分配了内存，需要在对象销毁时释放内存空间，因此，对象的析构可以在类的封装结束后再实现，这里先打一个框架，不做实现</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~MyString();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyString::~MyString()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>最后说明: 构造函数和析构函数，我们规定采用public声明，因此上述函数的声明都是在public字段中的</p>
+</blockquote>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Mr.Postgraduate
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhuqixing007.github.io/764912066.html" title="C++自定义实现MyString类的封装(一)">https://zhuqixing007.github.io/764912066.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
+            <a href="/tags/操作符重载/" rel="tag"># 操作符重载</a>
+          
+            <a href="/tags/友元函数/" rel="tag"># 友元函数</a>
+          
+            <a href="/tags/对象的构造和析构/" rel="tag"># 对象的构造和析构</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/561343915.html" rel="next" title="初识C++对象的构造和析构">
+                <i class="fa fa-chevron-left"></i> 初识C++对象的构造和析构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/1887828332.html" rel="prev" title="C++自定义实现MyString类的封装（二）">
+                C++自定义实现MyString类的封装（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -337,6 +603,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NjgzMi8yMzMzMw=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -359,8 +634,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -446,6 +730,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、-搭建类的框架"><span class="nav-number">2.</span> <span class="nav-text">一、 搭建类的框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MyString-hpp"><span class="nav-number">2.1.</span> <span class="nav-text">MyString.hpp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyString-cpp"><span class="nav-number">2.2.</span> <span class="nav-text">MyString.cpp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、-MyString要实现的基础业务需求"><span class="nav-number">3.</span> <span class="nav-text">二、 MyString要实现的基础业务需求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#成员变量"><span class="nav-number">3.1.</span> <span class="nav-text">成员变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyString-s"><span class="nav-number">3.2.</span> <span class="nav-text">MyString s;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyString-s-“abc”"><span class="nav-number">3.3.</span> <span class="nav-text">MyString  s = “abc”;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyString-s1-s2"><span class="nav-number">3.4.</span> <span class="nav-text">MyString s1 = s2;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的析构"><span class="nav-number">3.5.</span> <span class="nav-text">对象的析构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -629,6 +929,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -657,6 +961,17 @@ setInterval("createtime()",250);
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="true">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="wS99Y3zI7V">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面向对象,操作符重载,友元函数,对象的构造和析构,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Carpe Diem" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前文回顾在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。 本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。 MySt">
+<meta name="keywords" content="面向对象,操作符重载,友元函数,对象的构造和析构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++自定义实现MyString类的封装（二）">
+<meta property="og:url" content="https://zhuqixing007.github.io/1887828332.html">
+<meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="前文回顾在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。 本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。 MySt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-21T08:42:25.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++自定义实现MyString类的封装（二）">
+<meta name="twitter:description" content="前文回顾在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。 本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。 MySt">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhuqixing007.github.io/1887828332.html">
+
+
+
+
+
+  <title>C++自定义实现MyString类的封装（二） | Carpe Diem</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/zhuqixing007" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Carpe Diem</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhuqixing007.github.io/1887828332.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Postgraduate">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/imgs/personal_info/touxiang.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Carpe Diem">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++自定义实现MyString类的封装（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T07:44:13+08:00">
+                2019-10-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-21T16:42:25+08:00">
+                2019-11-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">C++学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>&nbsp&nbsp<span>阅读量:</span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前文回顾"><a href="#前文回顾" class="headerlink" title="前文回顾"></a>前文回顾</h1><p>在上一篇文章里我们实现了MyString类的构造和析构函数，所讲解的内容包含类的声明和实现分离、构造和析构函数的语法、const限定符的部分使用场景、引用的部分使用场景、this指针、函数重载这几个内容。</p>
+<p>本文要讲解的主要内容是操作符重载，实际上操作符重载可以被认为是函数重载的一种特殊情况。讲解内容以MyString类为例，注释形式为主，今天我们继续扩展MyString类的功能。</p>
+<h1 id="MyString类功能增强"><a href="#MyString类功能增强" class="headerlink" title="MyString类功能增强"></a>MyString类功能增强</h1><p>与前文相同，从功能的调用方式入手。</p>
+<h2 id="cout-lt-lt-s"><a href="#cout-lt-lt-s" class="headerlink" title="cout &lt;&lt; s;"></a>cout &lt;&lt; s;</h2><p>对象被创建以后，用户需要看到对象中的内容，所以我们就需要实现将s输出到屏幕上，看代码：</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp; s);</span><br><span class="line"><span class="comment">// 首先cout是一个输出流，他是一个ostream对象，所以接受的函数参数是一个ostream类型加一个MyString类型</span></span><br><span class="line"><span class="comment">// 其次如果你希望&lt;&lt;操作符支持链式编程，也就是可以这样调用:cout&lt;&lt;s&lt;&lt;"abc"&lt;&lt;endl,</span></span><br><span class="line"><span class="comment">// 那么你的返回类型也掩饰一个ostream对象</span></span><br><span class="line"><span class="comment">// 最后ostream类的源码，我们是不可见的，所以我们不能通过成员函数来实现操作符重载，</span></span><br><span class="line"><span class="comment">// 所以这里只能使用友元函数来实现，这也是友元函数的最大用武之地</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现非常简单，只要把s的值传递给ostream对象，然后返回就可以了</span></span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp;s) &#123;</span><br><span class="line">    out&lt;&lt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="cin-gt-gt-s"><a href="#cin-gt-gt-s" class="headerlink" title="cin &gt;&gt; s;"></a>cin &gt;&gt; s;</h2><p>从键盘键入内容传递给对象也是一个基本的业务，实现方式和cout类似，因此不做过多说明了</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp; s);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp;s) &#123;</span><br><span class="line">    in&gt;&gt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="s-i"><a href="#s-i" class="headerlink" title="s[i];"></a>s[i];</h2><p>根据索引获取对象的值，需要对[]操作符进行重载</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span>;</span><br><span class="line"><span class="comment">// 返回的值一个字符，所以函数的返回类型为char，索引是int型，同时不希望对象被改变，所以用const</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> MyString::<span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> ch[i]; <span class="comment">//直接返回ch的索引</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="s-“abc”-s1-s2"><a href="#s-“abc”-s1-s2" class="headerlink" title="s == “abc”; s1 == s2;"></a>s == “abc”; s1 == s2;</h2><p>判断是否相等有两种情况，一是判断一个对象是否和一个字符串相等，一是判断两个对象是否相等</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span> *p) <span class="keyword">const</span>;</span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//都是一些比较简单的业务逻辑</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span>*p) <span class="keyword">const</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length == <span class="number">0</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != <span class="built_in">strlen</span>(p))&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">      <span class="comment">//strcmp(s1,s2)   s1=s2返回0，s1&gt;s2返回大于0的值，s1&lt;s2返回小于0的值</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != s.Length)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="完整施工"><a href="#完整施工" class="headerlink" title="完整施工"></a>完整施工</h1><p>接下来还有一部分操作符重载，远离都类似就不再展开细讲了，下面给出封装完成的MyString类：</p>
+<blockquote>
+<p>MyString.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*实现自定义字符串类*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MyString_hpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MyString_hpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyString</span> &#123;</span></span><br><span class="line">   </span><br><span class="line"><span class="comment">//私有成员变量</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> Length;</span><br><span class="line">    <span class="keyword">char</span> * ch;   </span><br><span class="line">    </span><br><span class="line"><span class="comment">//构造和析构</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    MyString(<span class="keyword">int</span> length = <span class="number">0</span>);<span class="comment">//对象内存空间分配构造函数 </span></span><br><span class="line">    MyString(<span class="keyword">const</span> <span class="keyword">char</span> *p);<span class="comment">//对象初始化构造函数 </span></span><br><span class="line">    MyString(<span class="keyword">const</span> MyString &amp;obj);<span class="comment">//拷贝构造函数  </span></span><br><span class="line">    ~MyString();<span class="comment">//析构函数  </span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//成员函数</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>;<span class="comment">//返回长度   </span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> * <span class="title">c_str</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">char</span> * <span class="title">c_str</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数实现的操作符重载</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">char</span> <span class="keyword">operator</span>[](<span class="keyword">int</span> i) <span class="keyword">const</span>;<span class="comment">//[]操作符   </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span> * p) <span class="keyword">const</span>;  <span class="comment">//==操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> <span class="keyword">char</span> * p) <span class="keyword">const</span>;<span class="comment">// !=操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&gt;(MyString &amp; s);<span class="comment">// &gt;操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&gt;(<span class="keyword">const</span> <span class="keyword">char</span> * p);</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(MyString &amp; s);<span class="comment">// &lt;操作符  </span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> <span class="keyword">char</span> * p);</span><br><span class="line">    MyString &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> *p); <span class="comment">//=操作符 字符串赋值 </span></span><br><span class="line">    MyString &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> MyString &amp; s); <span class="comment">//=操作符 用一个对象给另一个对象赋值 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//友元函数实现的操作符重载</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp; s); <span class="comment">// &lt;&lt;操作符  </span></span><br><span class="line">    <span class="keyword">friend</span> istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp; s); <span class="comment">//  &gt;&gt;操作符  </span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* MyString_hpp */</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MyString.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MyString.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造和析构函数======================================================</span></span><br><span class="line">MyString::MyString(<span class="keyword">int</span> length) &#123;</span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = length;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::MyString(<span class="keyword">const</span> <span class="keyword">char</span> *p) &#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(p);</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::MyString(<span class="keyword">const</span> MyString &amp;obj) &#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;Length = obj.Length;</span><br><span class="line">    <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[Length + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, obj.ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MyString::~MyString() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>-&gt;ch != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] <span class="keyword">this</span>-&gt;ch;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//cout&lt;&lt;"对象"&lt;&lt;this&lt;&lt;"析构完成"&lt;&lt;endl;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构造和析构函数======================================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数===========================================================</span></span><br><span class="line"><span class="keyword">int</span> MyString::length() &#123;</span><br><span class="line">    <span class="keyword">return</span> Length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * MyString::c_str()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * MyString::c_str() <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员函数===========================================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员函数实现的操作符重载==============================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// []操作符重载</span></span><br><span class="line"><span class="keyword">char</span> MyString::<span class="keyword">operator</span>[](<span class="keyword">int</span> i)  <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ch[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ==操作符重载 调用方式：s == "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="keyword">char</span>* p) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != <span class="built_in">strlen</span>(p))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">        <span class="comment">//strcmp(s1,s2)相等返回为0，s1 若大于s2 则返回大于0 的值。s1 若小于s2 则返回小于0 的值。</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//return true;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ==操作符重载 调用方式：s1 == s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>==(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;Length != s.Length)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// !=操作符重载 调用方式：s1 != "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>!=(<span class="keyword">const</span> <span class="keyword">char</span>* p) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(*<span class="keyword">this</span> == p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 操作符重载 调用方式：s1 != s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>!=(<span class="keyword">const</span> MyString &amp; s) <span class="keyword">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(*<span class="keyword">this</span> == s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &gt;操作符重载 调用方式：s1 &gt; s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&gt;(MyString &amp; s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &gt;操作符重载 调用方式：s1 &gt; "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&gt;(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &lt;操作符重载 调用方式：s1 &lt; s2</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&lt;(MyString &amp; s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, s.ch) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &lt;操作符重载 调用方式：s1 &lt; "abc"</span></span><br><span class="line"><span class="keyword">bool</span> MyString::<span class="keyword">operator</span>&lt;(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="keyword">this</span>-&gt;ch, p) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// =操作符重载 调用方式：s1 = "abc"</span></span><br><span class="line">MyString &amp; MyString::<span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> * p)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;ch != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] <span class="keyword">this</span>-&gt;ch;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, <span class="string">""</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = (<span class="keyword">int</span>)<span class="built_in">strlen</span>(p);</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// =操作符重载 调用方式：s1 = s2</span></span><br><span class="line">MyString &amp; MyString::<span class="keyword">operator</span>=(<span class="keyword">const</span> MyString &amp; s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;ch != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] <span class="keyword">this</span>-&gt;ch;</span><br><span class="line">        <span class="keyword">this</span>-&gt;Length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>-&gt;ch = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">this</span>-&gt;Length = s.Length ;</span><br><span class="line">    <span class="keyword">this</span>-&gt;ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="keyword">this</span>-&gt;Length + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;ch, s.ch);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员函数实现的操作符重载==============================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//友元函数实现的操作符重载==============================================</span></span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; out, MyString &amp;s) &#123;</span><br><span class="line">    out&lt;&lt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in, MyString &amp;s) &#123;</span><br><span class="line">    in&gt;&gt;s.ch;</span><br><span class="line">    <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员函数实现的操作符重载==============================================</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Mr.Postgraduate
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhuqixing007.github.io/1887828332.html" title="C++自定义实现MyString类的封装（二）">https://zhuqixing007.github.io/1887828332.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
+            <a href="/tags/操作符重载/" rel="tag"># 操作符重载</a>
+          
+            <a href="/tags/友元函数/" rel="tag"># 友元函数</a>
+          
+            <a href="/tags/对象的构造和析构/" rel="tag"># 对象的构造和析构</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/764912066.html" rel="next" title="C++自定义实现MyString类的封装(一)">
+                <i class="fa fa-chevron-left"></i> C++自定义实现MyString类的封装(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2301220432.html" rel="prev" title="C++算法题：两数之和">
+                C++算法题：两数之和 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NjgzMi8yMzMzMw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/imgs/personal_info/touxiang.jpeg" alt="Mr.Postgraduate">
+            
+              <p class="site-author-name" itemprop="name">Mr.Postgraduate</p>
+              <p class="site-description motion-element" itemprop="description">往事不要再提，人生已多风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="280" height="86" src="//music.163.com/outchain/player?type=2&id=3411353&auto=1&height=66"></iframe>
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhuqixing007" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhuqixing123@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前文回顾"><span class="nav-number">1.</span> <span class="nav-text">前文回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyString类功能增强"><span class="nav-number">2.</span> <span class="nav-text">MyString类功能增强</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cout-lt-lt-s"><span class="nav-number">2.1.</span> <span class="nav-text">cout &lt;&lt; s;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cin-gt-gt-s"><span class="nav-number">2.2.</span> <span class="nav-text">cin &gt;&gt; s;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-i"><span class="nav-number">2.3.</span> <span class="nav-text">s[i];</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-“abc”-s1-s2"><span class="nav-number">2.4.</span> <span class="nav-text">s == “abc”; s1 == s2;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整施工"><span class="nav-number">3.</span> <span class="nav-text">完整施工</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <center>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Postgraduate</span>
+</div>
+
+
+
+
+
+
+
+
+  <span class="post-meta-item-icon">
+    <i class="fa fa-area-chart"></i>
+  </span>
+  
+    <span>全站总字数: </span>
+  
+  <span title="Site words total count">6.5k</span>
+
+<span class="post-meta-divider">|</span>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-eye"></i>访问量: <span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-user"></i>访客量: <span id="busuanzi_value_site_uv"></span>人
+
+
+
+<!-- 网站运行时间的设置 -->
+<br>
+<span id="timeDate"></span>
+<span id="times"></span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("09/10/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+</center>
+
+        
+<div class="busuanzi-count">
+  <script async src="“https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js”"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":180,"height":360},"mobile":{"show":false},"react":{"opacityDefault":1,"opacityOnHover":1},"log":false,"tagMode":false});</script></body>
+</html>
