@@ -1552,6 +1552,7 @@ pre .javascript .function {
 }
 .post-button {
   margin-top: 40px;
+  background: transparent;
 }
 .posts-expand .post-tags {
   margin-top: 40px;
@@ -1872,7 +1873,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f98220;
+  background: #ff18ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2027,6 +2028,7 @@ pre .javascript .function {
 }
 .footer-inner {
   text-align: center;
+  color: $black;
 }
 .with-love {
   display: inline-block;
@@ -2835,7 +2837,7 @@ pre .javascript .function {
 .site-meta {
   padding: 20px 0;
   color: #fff;
-  background: #222;
+  background: #000;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
@@ -2939,7 +2941,7 @@ pre .javascript .function {
   box-sizing: border-box;
   width: 240px;
   color: #555;
-  background: #fff;
+  background: rgba(255,255,255,0.5);
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   border-radius: initial;
   opacity: 0;
@@ -3211,15 +3213,4 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
-}
-body {
-  background: url("/images/background.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  -ms-background-size: cover;
 }
