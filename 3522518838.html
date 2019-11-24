@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="算法,C++,LeetCode,">
+  <meta name="keywords" content="算法,C++,LeetCode,哈希表,滑动窗口,">
 
 
 
@@ -86,14 +86,14 @@
 
 
 <meta name="description" content="问题描述给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 输入: “abcabcbb”输出: 3解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。示例 2: 输入: “bbbbb”输出: 1解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。示例 3: 输入: “pwwkew”输出: 3解释: 因为无重复字符的最长子串是 “wke”，所以其长度">
-<meta name="keywords" content="算法,C++,LeetCode">
+<meta name="keywords" content="算法,C++,LeetCode,哈希表,滑动窗口">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++算法题：无重复字符的最长子串">
 <meta property="og:url" content="https://zhuqixing007.github.io/3522518838.html">
 <meta property="og:site_name" content="Carpe Diem">
 <meta property="og:description" content="问题描述给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 输入: “abcabcbb”输出: 3解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。示例 2: 输入: “bbbbb”输出: 1解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。示例 3: 输入: “pwwkew”输出: 3解释: 因为无重复字符的最长子串是 “wke”，所以其长度">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-24T10:01:31.901Z">
+<meta property="og:updated_time" content="2019-11-24T10:54:03.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++算法题：无重复字符的最长子串">
 <meta name="twitter:description" content="问题描述给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 输入: “abcabcbb”输出: 3解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。示例 2: 输入: “bbbbb”输出: 1解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。示例 3: 输入: “pwwkew”输出: 3解释: 因为无重复字符的最长子串是 “wke”，所以其长度">
@@ -348,7 +348,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-24T18:01:31+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-24T18:54:03+08:00">
                 2019-11-24
               </time>
             
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  202
+                  530
                 </span>
               
 
@@ -441,6 +441,10 @@
 <blockquote>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>这个题可以用滑动窗口来解决，首先定义窗口的起点和终点，所求最长子串的长度就是终点和起点的差值。</p>
+<p>从第一个字符开始扫描，扫描前窗口的起点和终点都是0，扫描结束后起点为0，终点为1，所以第一次扫描所求的结果为1；然后开始下一次的扫描，如果终点字符没有出现在起点字符到终点字符前的字符之间，那么起点依然不变，终点向后滑动一个单位，否则将起点向后滑动至前面出现的最近的与终点字符相同的字符的下一个单位，以此类推，下面是代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt; Mmap; <span class="comment">//用于保存s中字符的最新索引，用哈希表查找更快</span></span><br><span class="line">    <span class="keyword">int</span> sSize = s.size(); <span class="comment">//求s的长度</span></span><br><span class="line">    <span class="keyword">int</span> start = <span class="number">0</span>, end = <span class="number">0</span>, len = <span class="number">0</span>, max = <span class="number">0</span>; <span class="comment">//窗口起点，终点，长度，最大无重复子串长度</span></span><br><span class="line">    <span class="keyword">char</span> temp; <span class="comment">//临时存储字符</span></span><br><span class="line">    <span class="keyword">while</span>(end&lt;sSize)&#123;</span><br><span class="line">        temp = s[end]; </span><br><span class="line">        <span class="keyword">if</span>(Mmap.find(temp)!=Mmap.end() &amp;&amp; Mmap[temp]&gt;=start)&#123;</span><br><span class="line">            <span class="comment">//出现重复字符，改变起点位置</span></span><br><span class="line">            start = Mmap[temp] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Mmap[temp] = end; </span><br><span class="line">        end++;</span><br><span class="line">        len = end - start;</span><br><span class="line">        <span class="keyword">if</span>(max&lt;len)&#123;</span><br><span class="line">            max = len;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -481,6 +485,10 @@
             <a href="/tags/C/" rel="tag"># C++</a>
           
             <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+          
+            <a href="/tags/滑动窗口/" rel="tag"># 滑动窗口</a>
           
         </div>
       
@@ -624,7 +632,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -681,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li></ol></div>
             
 
           </div>
@@ -722,7 +730,7 @@
   
     <span>全站总字数: </span>
   
-  <span title="Site words total count">6.7k</span>
+  <span title="Site words total count">7.1k</span>
 
 <span class="post-meta-divider">|</span>
 
