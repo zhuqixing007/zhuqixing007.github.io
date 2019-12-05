@@ -82,15 +82,18 @@
 
 
 
+<meta name="description" content="一、什么是vectorvector是C++的模版类，它是一种动态数组，可以在动态的插入，删除，追加元素，使用vector必须包含头文件vector，同时vector包含在名称空间std中，因此使用它还必须使用using编译指令或者std::vector。 二、vector的创建12345678#include &quot;vector&quot;using namespace std;int main()&amp;#123;">
 <meta name="keywords" content="vector">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++的vector用法全解">
 <meta property="og:url" content="https://zhuqixing007.github.io/402551672.html">
 <meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="一、什么是vectorvector是C++的模版类，它是一种动态数组，可以在动态的插入，删除，追加元素，使用vector必须包含头文件vector，同时vector包含在名称空间std中，因此使用它还必须使用using编译指令或者std::vector。 二、vector的创建12345678#include &quot;vector&quot;using namespace std;int main()&amp;#123;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-04T14:32:32.267Z">
+<meta property="og:updated_time" content="2019-12-05T04:30:35.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++的vector用法全解">
+<meta name="twitter:description" content="一、什么是vectorvector是C++的模版类，它是一种动态数组，可以在动态的插入，删除，追加元素，使用vector必须包含头文件vector，同时vector包含在名称空间std中，因此使用它还必须使用using编译指令或者std::vector。 二、vector的创建12345678#include &quot;vector&quot;using namespace std;int main()&amp;#123;">
 
 
 
@@ -342,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-04T22:32:32+08:00">
-                2019-12-04
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-05T12:30:35+08:00">
+                2019-12-05
               </time>
             
           </span>
@@ -415,7 +418,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  438
                 </span>
               
 
@@ -440,7 +443,46 @@
       
 
       
-        
+        <h1 id="一、什么是vector"><a href="#一、什么是vector" class="headerlink" title="一、什么是vector"></a>一、什么是vector</h1><p>vector是C++的模版类，它是一种动态数组，可以在动态的插入，删除，追加元素，使用vector必须包含头文件vector，同时vector包含在名称空间std中，因此使用它还必须使用using编译指令或者std::vector。</p>
+<h1 id="二、vector的创建"><a href="#二、vector的创建" class="headerlink" title="二、vector的创建"></a>二、vector的创建</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1; <span class="comment">//声明一个int型vector变量</span></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2(<span class="number">5</span>); <span class="comment">//声明一个int型vector变量，且长度为5</span></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;; <span class="comment">//声明的同时初始化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、vector的函数用法"><a href="#三、vector的函数用法" class="headerlink" title="三、vector的函数用法"></a>三、vector的函数用法</h1><h2 id="push-back"><a href="#push-back" class="headerlink" title="push_back()"></a>push_back()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.push_back(<span class="number">1</span>); <span class="comment">//在v的最后增加元素1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="insert"><a href="#insert" class="headerlink" title="insert()"></a>insert()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1.insert(v1.begin(), <span class="number">2</span>); <span class="comment">//在v1的第一个元素前面插入2</span></span><br><span class="line">v1.insert(v1.begin(), <span class="number">10</span>, <span class="number">1</span>); <span class="comment">//在v1的第一个元素前面插入10个1</span></span><br><span class="line">v1.insert(v1.begin(), v2.begin(), v2.end()); <span class="comment">//在v1的第一个元素前面插入v2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="erase"><a href="#erase" class="headerlink" title="erase()"></a>erase()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v1.erase(v1.begin()+<span class="number">1</span>); <span class="comment">//删除第二个元素</span></span><br><span class="line">v1.erase(v1.begin(), v1.begin()+<span class="number">2</span>); <span class="comment">//删除[0,2)的元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="pop-back"><a href="#pop-back" class="headerlink" title="pop_back()"></a>pop_back()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.pop_back(); <span class="comment">//删除最后一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.clear(); <span class="comment">//清空v1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="at"><a href="#at" class="headerlink" title="at()"></a>at()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;v1.at(<span class="number">1</span>)&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//输出v1的第二个元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="front"><a href="#front" class="headerlink" title="front()"></a>front()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;v1.front()&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//输出v1首元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="back"><a href="#back" class="headerlink" title="back()"></a>back()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;v1.back()&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//输出v1尾元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="begin"><a href="#begin" class="headerlink" title="begin()"></a>begin()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;*(v1.begin())&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//begin()返回指向首元素的指针，用*解除引用，输出首元素值</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="end"><a href="#end" class="headerlink" title="end()"></a>end()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;*(v1.begin())&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//用法同上</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="rbegin"><a href="#rbegin" class="headerlink" title="rbegin()"></a>rbegin()</h2><p>与end()相同</p>
+<h2 id="rend"><a href="#rend" class="headerlink" title="rend()"></a>rend()</h2><p>与begin()相同</p>
+<h2 id="empty"><a href="#empty" class="headerlink" title="empty()"></a>empty()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.empty(); <span class="comment">//判断vector是否为空</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="size"><a href="#size" class="headerlink" title="size()"></a>size()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> len = v1.size(); <span class="comment">//返回元素个数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="capacity"><a href="#capacity" class="headerlink" title="capacity()"></a>capacity()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.capacity(); <span class="comment">//获取v1定义的容量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="max-size"><a href="#max-size" class="headerlink" title="max_size()"></a>max_size()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.max_size(); <span class="comment">//返回vector的最大可容纳元素数量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="swap"><a href="#swap" class="headerlink" title="swap()"></a>swap()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1.swap(v2); <span class="comment">//交换v1和v2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort(v1.begin(), v1.end()); <span class="comment">//从小到大排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reverse(v1.begin(), v1.end()); <span class="comment">//从大到小排序</span></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -568,8 +610,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -656,6 +707,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、什么是vector"><span class="nav-number">1.</span> <span class="nav-text">一、什么是vector</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、vector的创建"><span class="nav-number">2.</span> <span class="nav-text">二、vector的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、vector的函数用法"><span class="nav-number">3.</span> <span class="nav-text">三、vector的函数用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#push-back"><span class="nav-number">3.1.</span> <span class="nav-text">push_back()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert"><span class="nav-number">3.2.</span> <span class="nav-text">insert()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#erase"><span class="nav-number">3.3.</span> <span class="nav-text">erase()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pop-back"><span class="nav-number">3.4.</span> <span class="nav-text">pop_back()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear"><span class="nav-number">3.5.</span> <span class="nav-text">clear()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#at"><span class="nav-number">3.6.</span> <span class="nav-text">at()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#front"><span class="nav-number">3.7.</span> <span class="nav-text">front()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#back"><span class="nav-number">3.8.</span> <span class="nav-text">back()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#begin"><span class="nav-number">3.9.</span> <span class="nav-text">begin()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#end"><span class="nav-number">3.10.</span> <span class="nav-text">end()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rbegin"><span class="nav-number">3.11.</span> <span class="nav-text">rbegin()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rend"><span class="nav-number">3.12.</span> <span class="nav-text">rend()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#empty"><span class="nav-number">3.13.</span> <span class="nav-text">empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#size"><span class="nav-number">3.14.</span> <span class="nav-text">size()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity"><span class="nav-number">3.15.</span> <span class="nav-text">capacity()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max-size"><span class="nav-number">3.16.</span> <span class="nav-text">max_size()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swap"><span class="nav-number">3.17.</span> <span class="nav-text">swap()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort"><span class="nav-number">3.18.</span> <span class="nav-text">sort()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number">3.19.</span> <span class="nav-text">reverse()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -690,7 +757,7 @@
   
     <span>全站总字数: </span>
   
-  <span title="Site words total count">7.7k</span>
+  <span title="Site words total count">8.1k</span>
 
 <span class="post-meta-divider">|</span>
 
