@@ -82,15 +82,18 @@
 
 
 
+<meta name="description" content="初始化随机矩阵12345678910111213# 初始化一个4*4的矩阵，并在随机的两个位置随机生成2或4matrix = []for i in range(4):    atrix.append([])    for j in range(4):        matrix[i].append(0)for i in range(2):    x = random.randint(0, 3)">
 <meta name="keywords" content="pygame">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零开始做一个无界面的2048">
 <meta property="og:url" content="https://zhuqixing007.github.io/230921126.html">
 <meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="初始化随机矩阵12345678910111213# 初始化一个4*4的矩阵，并在随机的两个位置随机生成2或4matrix = []for i in range(4):    atrix.append([])    for j in range(4):        matrix[i].append(0)for i in range(2):    x = random.randint(0, 3)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-13T07:13:40.342Z">
+<meta property="og:updated_time" content="2020-04-13T07:40:35.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零开始做一个无界面的2048">
+<meta name="twitter:description" content="初始化随机矩阵12345678910111213# 初始化一个4*4的矩阵，并在随机的两个位置随机生成2或4matrix = []for i in range(4):    atrix.append([])    for j in range(4):        matrix[i].append(0)for i in range(2):    x = random.randint(0, 3)">
 
 
 
@@ -342,7 +345,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-13T15:13:40+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-13T15:40:35+08:00">
                 2020-04-13
               </time>
             
@@ -415,7 +418,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  800
                 </span>
               
 
@@ -440,7 +443,37 @@
       
 
       
-        
+        <h1 id="初始化随机矩阵"><a href="#初始化随机矩阵" class="headerlink" title="初始化随机矩阵"></a>初始化随机矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化一个4*4的矩阵，并在随机的两个位置随机生成2或4</span></span><br><span class="line">matrix = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    atrix.append([])</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        matrix[i].append(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">    x = random.randint(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">    y = random.randint(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">    matrix[x][y] = random.choice([<span class="number">2</span>, <span class="number">4</span>])</span><br><span class="line"><span class="keyword">for</span> m <span class="keyword">in</span> matrix:</span><br><span class="line">    print(<span class="string">' '</span>.join([str(x) <span class="keyword">for</span> x <span class="keyword">in</span> m]))</span><br><span class="line">    print()</span><br></pre></td></tr></table></figure>
+
+<h1 id="按移动方向将所有非0数排到前面"><a href="#按移动方向将所有非0数排到前面" class="headerlink" title="按移动方向将所有非0数排到前面"></a>按移动方向将所有非0数排到前面</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check0</span><span class="params">(l)</span>:</span></span><br><span class="line">    <span class="comment"># 按移动方向将所有非0数排到前面</span></span><br><span class="line">    flag1 = <span class="number">1</span> </span><br><span class="line">    <span class="keyword">while</span> flag1 == <span class="number">1</span>:</span><br><span class="line">        flag1 = <span class="number">0</span></span><br><span class="line">        flag2 = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">            <span class="keyword">if</span> flag2 == <span class="number">1</span> <span class="keyword">and</span> i != <span class="number">0</span>:</span><br><span class="line">                flag1 = <span class="number">1</span>  <span class="comment"># 0后面出现非0数</span></span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                flag2 = <span class="number">1</span>  <span class="comment"># 出现0</span></span><br><span class="line">        <span class="keyword">if</span> flag1 == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">                <span class="keyword">if</span> l[i] == <span class="number">0</span>:</span><br><span class="line">                    <span class="comment"># 非0数前移</span></span><br><span class="line">                    l[i] = l[i + <span class="number">1</span>]</span><br><span class="line">                    l[i + <span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> l</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入输出示例：</p>
+<p>输入：[0,0,2,2]</p>
+<p>输出：[2,2,0,0]</p>
+</blockquote>
+<h1 id="定义移动规则"><a href="#定义移动规则" class="headerlink" title="定义移动规则"></a>定义移动规则</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span><span class="params">(l)</span>:</span></span><br><span class="line">    l = check0(l)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">if</span> l[i] == l[i + <span class="number">1</span>]:</span><br><span class="line">            l[i] *= <span class="number">2</span></span><br><span class="line">            l[i + <span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> check0(l)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入输出示例：</p>
+<p>输入：[0,0,2,2]</p>
+<p>输出：[4,0,0,0]</p>
+</blockquote>
+<h1 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a>矩阵转置</h1><p>简化了移动的操作逻辑，比如上移操作就是将矩阵转置后左移，再把矩阵转置回来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convertMatrix</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        res.append([])</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            res[i].append(matrix[j][i])</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>#实现上下左右移动 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moveLeft</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        matrix[i] = move(matrix[i])</span><br><span class="line">    <span class="keyword">return</span> matrix</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moveRight</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="comment"># move()函数默认是将列表左移，所以将列表反转后左移，再反转也就是右移</span></span><br><span class="line">        matrix[i].reverse()</span><br><span class="line">        matrix[i] = move(matrix[i])</span><br><span class="line">        matrix[i].reverse()</span><br><span class="line">    <span class="keyword">return</span> matrix</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moveUp</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> convertMatrix(moveLeft(convertMatrix(matrix)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moveDown</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> convertMatrix(moveRight(convertMatrix(matrix)))</span><br></pre></td></tr></table></figure>
+
+<h1 id="移动结束后在随机位置添加随机新数字"><a href="#移动结束后在随机位置添加随机新数字" class="headerlink" title="移动结束后在随机位置添加随机新数字"></a>移动结束后在随机位置添加随机新数字</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AddNewNum</span><span class="params">(matrix)</span>:</span></span><br><span class="line">    new_num = random.choice([<span class="number">2</span>, <span class="number">4</span>])</span><br><span class="line">    positions = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            <span class="keyword">if</span> matrix[i][j] == <span class="number">0</span>:</span><br><span class="line">                positions.append([i, j])</span><br><span class="line">    <span class="keyword">if</span> len(positions) &gt; <span class="number">0</span>:</span><br><span class="line">        position = random.choice(positions)</span><br><span class="line">        matrix[position[<span class="number">0</span>]][position[<span class="number">1</span>]] = new_num</span><br><span class="line">    <span class="keyword">return</span> matrix</span><br></pre></td></tr></table></figure>
+
+<p>到这里，我们就完成了游戏的主要逻辑代码</p>
+<h1 id="创建游戏的类"><a href="#创建游戏的类" class="headerlink" title="创建游戏的类"></a>创建游戏的类</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Game2048</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__matrix = []</span><br><span class="line">        self.__mcopy = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setCanves</span><span class="params">(self)</span>:</span></span><br><span class="line">      	<span class="comment"># 初始化4*4的矩阵</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">            self.__matrix.append([])</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">                self.__matrix[i].append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            x = random.randint(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">            y = random.randint(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">            self.__matrix[x][y] = random.choice([<span class="number">2</span>, <span class="number">4</span>])</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.__matrix:</span><br><span class="line">            print(<span class="string">' '</span>.join([str(x) <span class="keyword">for</span> x <span class="keyword">in</span> m]))</span><br><span class="line">        print()</span><br><span class="line">        self.__mcopy = copy.deepcopy(self.__matrix)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Up</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__matrix = moveLogic.moveUp(self.__matrix)</span><br><span class="line">        self.UpDateCanves()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Down</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__matrix = moveLogic.moveDown(self.__matrix)</span><br><span class="line">        self.UpDateCanves()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Left</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__matrix = moveLogic.moveLeft(self.__matrix)</span><br><span class="line">        self.UpDateCanves()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Right</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__matrix = moveLogic.moveRight(self.__matrix)</span><br><span class="line">        self.UpDateCanves()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">UpDateCanves</span><span class="params">(self)</span>:</span></span><br><span class="line">      	<span class="comment"># 移动后输出新矩阵</span></span><br><span class="line">        <span class="keyword">if</span> self.__mcopy != self.__matrix:</span><br><span class="line">            self.__matrix = moveLogic.AddNewNum(self.__matrix)</span><br><span class="line">            self.__mcopy = copy.deepcopy(self.__matrix)</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.__matrix:</span><br><span class="line">            print(<span class="string">' '</span>.join([str(x) <span class="keyword">for</span> x <span class="keyword">in</span> m]))</span><br><span class="line">        print()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GameOver</span><span class="params">(self)</span>:</span></span><br><span class="line">      	<span class="comment"># 如果上下左右都不能移动，那么游戏结束</span></span><br><span class="line">        tempMatrix = copy.deepcopy(self.__matrix)</span><br><span class="line">        <span class="keyword">if</span> tempMatrix == moveLogic.moveRight(tempMatrix):</span><br><span class="line">            <span class="keyword">if</span> tempMatrix == moveLogic.moveLeft(tempMatrix):</span><br><span class="line">                <span class="keyword">if</span> tempMatrix == moveLogic.moveUp(tempMatrix):</span><br><span class="line">                    <span class="keyword">if</span> tempMatrix == moveLogic.moveDown(tempMatrix):</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="让游戏运行起来"><a href="#让游戏运行起来" class="headerlink" title="让游戏运行起来"></a>让游戏运行起来</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">game = Game2048()</span><br><span class="line">game.setCanves()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">not</span> game.GameOver():</span><br><span class="line">    op = input(<span class="string">"输入移动方向（W上A左S下D右）："</span>)</span><br><span class="line">    <span class="keyword">if</span> op == <span class="string">"W"</span>:</span><br><span class="line">        game.Up()</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="string">"A"</span>:</span><br><span class="line">        game.Left()</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="string">"S"</span>:</span><br><span class="line">        game.Down()</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="string">"D"</span>:</span><br><span class="line">        game.Right()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"移动方向输入错误！"</span>)</span><br><span class="line">print(<span class="string">"游戏结束"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>到这里一个完整的无界面2048小游戏就完成了，本文的任务完成，后面有时间再做图形界面</p>
+
       
     </div>
     
@@ -568,8 +601,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -656,6 +698,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化随机矩阵"><span class="nav-number">1.</span> <span class="nav-text">初始化随机矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按移动方向将所有非0数排到前面"><span class="nav-number">2.</span> <span class="nav-text">按移动方向将所有非0数排到前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义移动规则"><span class="nav-number">3.</span> <span class="nav-text">定义移动规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵转置"><span class="nav-number">4.</span> <span class="nav-text">矩阵转置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动结束后在随机位置添加随机新数字"><span class="nav-number">5.</span> <span class="nav-text">移动结束后在随机位置添加随机新数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建游戏的类"><span class="nav-number">6.</span> <span class="nav-text">创建游戏的类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让游戏运行起来"><span class="nav-number">7.</span> <span class="nav-text">让游戏运行起来</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -690,7 +748,7 @@
   
     <span>全站总字数: </span>
   
-  <span title="Site words total count">8k</span>
+  <span title="Site words total count">8.9k</span>
 
 <span class="post-meta-divider">|</span>
 
