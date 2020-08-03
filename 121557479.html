@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="搭建kuberbetes学习环境0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 12grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linuxsysctl -a | grep -E --color &apos;machdep.cpu.features|VMX&apos;    #Mac  由于本机Linux环境为虚拟">
+<meta name="description" content="0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 12grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linuxsysctl -a | grep -E --color &apos;machdep.cpu.features|VMX&apos;    #Mac  由于本机Linux环境为虚拟机安装，在虚拟机安装的系统中不支">
 <meta name="keywords" content="云原生,虚拟化,kubernetes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建kubernetes学习环境01">
 <meta property="og:url" content="https://zhuqixing007.github.io/121557479.html">
 <meta property="og:site_name" content="Carpe Diem">
-<meta property="og:description" content="搭建kuberbetes学习环境0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 12grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linuxsysctl -a | grep -E --color &apos;machdep.cpu.features|VMX&apos;    #Mac  由于本机Linux环境为虚拟">
+<meta property="og:description" content="0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 12grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linuxsysctl -a | grep -E --color &apos;machdep.cpu.features|VMX&apos;    #Mac  由于本机Linux环境为虚拟机安装，在虚拟机安装的系统中不支">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-03T10:15:51.107Z">
+<meta property="og:updated_time" content="2020-08-03T12:47:49.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建kubernetes学习环境01">
-<meta name="twitter:description" content="搭建kuberbetes学习环境0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 12grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linuxsysctl -a | grep -E --color &apos;machdep.cpu.features|VMX&apos;    #Mac  由于本机Linux环境为虚拟">
+<meta name="twitter:description" content="0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 12grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linuxsysctl -a | grep -E --color &apos;machdep.cpu.features|VMX&apos;    #Mac  由于本机Linux环境为虚拟机安装，在虚拟机安装的系统中不支">
 
 
 
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-03T18:15:51+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-03T20:47:49+08:00">
                 2020-08-03
               </time>
             
@@ -418,7 +418,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  756
+                  750
                 </span>
               
 
@@ -443,7 +443,7 @@
       
 
       
-        <h2 id="搭建kuberbetes学习环境"><a href="#搭建kuberbetes学习环境" class="headerlink" title="搭建kuberbetes学习环境"></a>搭建kuberbetes学习环境</h2><h3 id="0-查看本机是否支持虚拟化"><a href="#0-查看本机是否支持虚拟化" class="headerlink" title="0. 查看本机是否支持虚拟化"></a>0. 查看本机是否支持虚拟化</h3><p>如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开</p>
+        <h3 id="0-查看本机是否支持虚拟化"><a href="#0-查看本机是否支持虚拟化" class="headerlink" title="0. 查看本机是否支持虚拟化"></a>0. 查看本机是否支持虚拟化</h3><p>如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -E --color 'vmx|svm' /proc/cpuinfo    #Linux</span><br><span class="line">sysctl -a | grep -E --color 'machdep.cpu.features|VMX'    #Mac</span><br></pre></td></tr></table></figure>
 
 <p>由于本机Linux环境为虚拟机安装，在虚拟机安装的系统中不支持再次虚拟化，因此搭建环境调整为实体机Mac OS环境，系统版本为10.15.6。</p>
@@ -716,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建kuberbetes学习环境"><span class="nav-number">1.</span> <span class="nav-text">搭建kuberbetes学习环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-查看本机是否支持虚拟化"><span class="nav-number">1.1.</span> <span class="nav-text">0. 查看本机是否支持虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装并配置kubectl"><span class="nav-number">1.2.</span> <span class="nav-text">1. 安装并配置kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Minikube"><span class="nav-number">1.3.</span> <span class="nav-text">2. 安装Minikube</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-查看本机是否支持虚拟化"><span class="nav-number">1.</span> <span class="nav-text">0. 查看本机是否支持虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装并配置kubectl"><span class="nav-number">2.</span> <span class="nav-text">1. 安装并配置kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Minikube"><span class="nav-number">3.</span> <span class="nav-text">2. 安装Minikube</span></a></li></ol></div>
             
 
           </div>
