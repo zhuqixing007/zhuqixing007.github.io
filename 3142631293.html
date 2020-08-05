@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="Carpe Diem">
 <meta property="og:description" content="0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 1grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linux  由于本机Linux环境为虚拟机安装，在虚拟机安装的系统中不支持再次虚拟化，不过没关系，后面会说解决方案。 1. 安装并配置kubectl在 Kubernetes 上使用 Kubernet">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-03T15:53:45.210Z">
+<meta property="og:updated_time" content="2020-08-04T09:01:14.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建kubernetes学习环境02--ubuntu篇">
 <meta name="twitter:description" content="0. 查看本机是否支持虚拟化如下命令有输出即代表支持，个别电脑默认关闭了CPU虚拟化，需要到BIOS中去打开 1grep -E --color &apos;vmx|svm&apos; /proc/cpuinfo    #Linux  由于本机Linux环境为虚拟机安装，在虚拟机安装的系统中不支持再次虚拟化，不过没关系，后面会说解决方案。 1. 安装并配置kubectl在 Kubernetes 上使用 Kubernet">
@@ -345,8 +345,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-03T23:53:45+08:00">
-                2020-08-03
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-04T17:01:14+08:00">
+                2020-08-04
               </time>
             
           </span>
@@ -463,7 +463,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sorry, Kubernetes 1.18.3 requires conntrack to be installed in root's path</span><br></pre></td></tr></table></figure>
 
 <p>安装<code>conntract</code>就行了，之后再重新执行上面的命令启动minikube就不会报错了：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install conntract</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install conntrack</span><br></pre></td></tr></table></figure>
 
 <p>查看集群状态：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo minikube status</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出如下， 表明启动成功</span></span><br><span class="line">minikube</span><br><span class="line">type: Control Plane</span><br><span class="line">host: Running</span><br><span class="line">kubelet: Running</span><br><span class="line">apiserver: Running</span><br><span class="line">kubeconfig: Configured</span><br></pre></td></tr></table></figure>
@@ -558,6 +558,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/3912282315.html" rel="prev" title="搭建kubernetes学习环境03">
+                搭建kubernetes学习环境03 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -640,7 +644,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -760,7 +764,7 @@
   
     <span>全站总字数: </span>
   
-  <span title="Site words total count">8.2k</span>
+  <span title="Site words total count">9.4k</span>
 
 <span class="post-meta-divider">|</span>
 

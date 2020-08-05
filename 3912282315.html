@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="云原生,虚拟化,kubernetes,">
 
 
 
@@ -82,13 +82,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Carpe Diem">
-<meta property="og:url" content="https://zhuqixing007.github.io/tags/学习笔记/index.html">
+<meta name="description" content="前两篇文章讲过了Mac和ubuntu的kubectl和minikube的安装，以及启动一个集群并在浏览器中能打开dashboard，本篇接着往下学习。本次学习kubernetes的最终目的是实现双栈访问，我也是啥也不懂，一步步摸索吧，在这个进度已经卡了两天了，踩了很多坑。一开始打算直接在Mac上跑，问题相对还好，不算多，大多数是网络连接的问题，随着学习的深入，要用到的有的插件不支持mac，无奈就用">
+<meta name="keywords" content="云原生,虚拟化,kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建kubernetes学习环境03">
+<meta property="og:url" content="https://zhuqixing007.github.io/3912282315.html">
 <meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="前两篇文章讲过了Mac和ubuntu的kubectl和minikube的安装，以及启动一个集群并在浏览器中能打开dashboard，本篇接着往下学习。本次学习kubernetes的最终目的是实现双栈访问，我也是啥也不懂，一步步摸索吧，在这个进度已经卡了两天了，踩了很多坑。一开始打算直接在Mac上跑，问题相对还好，不算多，大多数是网络连接的问题，随着学习的深入，要用到的有的插件不支持mac，无奈就用">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-05T10:59:05.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Carpe Diem">
+<meta name="twitter:title" content="搭建kubernetes学习环境03">
+<meta name="twitter:description" content="前两篇文章讲过了Mac和ubuntu的kubectl和minikube的安装，以及启动一个集群并在浏览器中能打开dashboard，本篇接着往下学习。本次学习kubernetes的最终目的是实现双栈访问，我也是啥也不懂，一步步摸索吧，在这个进度已经卡了两天了，踩了很多坑。一开始打算直接在Mac上跑，问题相对还好，不算多，大多数是网络连接的问题，随着学习的深入，要用到的有的插件不支持mac，无奈就用">
 
 
 
@@ -118,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://zhuqixing007.github.io/tags/学习笔记/">
+  <link rel="canonical" href="https://zhuqixing007.github.io/3912282315.html">
 
 
 
 
 
-  <title>标签: 学习笔记 | Carpe Diem</title>
+  <title>搭建kubernetes学习环境03 | Carpe Diem</title>
   
 
 
@@ -143,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/zhuqixing007" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -281,52 +286,283 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>学习笔记<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhuqixing007.github.io/3912282315.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Postgraduate">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/imgs/personal_info/touxiang.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Carpe Diem">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/561343915.html" itemprop="url">
-              
-                <span itemprop="name">初识C++对象的构造和析构</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">搭建kubernetes学习环境03</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-22T13:04:30+08:00" content="2019-10-22">
-          10-22
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-04T12:55:09+08:00">
+                2020-08-04
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-05T18:59:05+08:00">
+                2020-08-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>&nbsp评论数:
+                </span>
+                <a href="/3912282315.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/3912282315.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/3912282315.html" class="leancloud_visitors" data-flag-title="搭建kubernetes学习环境03">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前两篇文章讲过了Mac和ubuntu的kubectl和minikube的安装，以及启动一个集群并在浏览器中能打开dashboard，本篇接着往下学习。本次学习kubernetes的最终目的是实现双栈访问，我也是啥也不懂，一步步摸索吧，在这个进度已经卡了两天了，踩了很多坑。一开始打算直接在Mac上跑，问题相对还好，不算多，大多数是网络连接的问题，随着学习的深入，要用到的有的插件不支持mac，无奈就用虚拟机Linux跑了，各种问题，一言难尽，墙的问题就不说了，虚拟机最大的问题在于不能用vm-driver，有的组件运行不了，我也不知道为什么，尝试了很多办法都搞不定，然后又尝试在云主机上跑，先试在用来做梯子的vultr主机上搭环境，遇到的第一个问题就是配置不够，我的主机是单核的，minikube要求最低双核，难受。然后又薅了阿里云一个月免费使用的羊毛，配置是够了，但是kubectl安装好了之后，用的时候提示找不到命令，原因是没有环境变量，于是又手动把kubectl加到环境变量，还是没用。这两天一直在MacOS，Linux虚拟机，云主机之间来回尝试，这里并不是说我尝试的其他方案不行，只是因为我是新手，也不太懂，网上查到的也有成功的案例。万般无奈之下，拿出了自从换了Mac之后沦为游戏机的旧电脑，分盘，装了个ubuntu，遇到了显卡驱动冲突的问题，还好是以前的主力机，应对显卡驱动冲突问题也是有经验的，具体解决方案，后期有空的话在写篇博文吧。目前来看，除了墙的问题，暂时还是比较顺利的，老电脑又发挥了一把余热。下面进入正题吧。</p>
+<h3 id="与集群交互"><a href="#与集群交互" class="headerlink" title="与集群交互"></a>与集群交互</h3><p>使用名为 <code>echoserver</code> 的镜像创建一个 Kubernetes Deployment，并使用 <code>--port</code> 在端口 8080 上暴露服务。<code>echoserver</code> 是一个简单的 HTTP 服务器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10 # 这是官网给的镜像源，可能不可用，如果不可用，就用下面的镜像源</span><br><span class="line">kubectl create deployment hello-minikube --image=mirrorgooglecontainers/echoserver:1.10 # 拉取也有可能失败，目前没有比较好的解决办法，但是我睡一觉起来发现镜像拉下来了，可能睡觉也是一种解决方案...</span><br></pre></td></tr></table></figure>
+
+<p>将其作为 Service 公开：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose deployment hello-minikube --type=NodePort --port=8080</span><br></pre></td></tr></table></figure>
+
+<p>现在 <code>hello-minikube</code> Pod 已经启动，但是必须等到 Pod 启动完全才能通过暴露的 Service 访问它,检查 Pod 是否启动并运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod</span><br><span class="line"><span class="meta">#</span><span class="bash"> 看到下面的输出就说明成功了，如果失败就需要删除service以及deployment，切换镜像源，重复以上步骤</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除service：kubectl delete services hello-minikube</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除deployment：kubectl delete deployment hello-minikube</span></span><br><span class="line">NAME                              READY   STATUS    RESTARTS   AGE</span><br><span class="line">hello-minikube-6c684d8b47-rl7fj   1/1     Running   0          170m</span><br></pre></td></tr></table></figure>
+
+<p>获取暴露 Service 的 URL 以查看 Service 的详细信息，把下面输出的url在浏览器打开就能看到了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube service hello-minikube --url</span><br></pre></td></tr></table></figure>
+
+<p>这个pod先不要删除，后面配置双栈访问可能需要，如果没用到时候再删也不迟。</p>
+<h3 id="Pod寻址"><a href="#Pod寻址" class="headerlink" title="Pod寻址"></a>Pod寻址</h3><p>下面的命令是用来查看Pod寻址的，由于没有配置ipv6访问，所以输出只有ipv4地址，Pod的名称换成自己的Pod名称就可以了，就是<code>kubectl get pod</code>输出的Pod名称：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods test-pod-6bcfcc5965-89kxf -o go-template --template='&#123;&#123;range .status.podIPs&#125;&#125;&#123;&#123;printf "%s \n" .ip&#125;&#125;&#123;&#123;end&#125;&#125;'</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下面是输出信息</span></span><br><span class="line">172.17.0.2</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装calico"><a href="#安装calico" class="headerlink" title="安装calico"></a>安装calico</h3><p>配置双栈访问的必须有支持双栈协议的网络插件，官网给了两个：kubenet和calico，前面一个没找到怎么装，就选择了后者。</p>
+<p>Calico官网提供了两个版本，一个适用于50个节点以下，一个用于50个节点以上，我们没有那么高的需求，就装第一个了，下面是安装命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://docs.projectcalico.org/manifests/calico.yaml -O # 下载</span><br><span class="line">kubectl apply -f calico.yaml # 安装</span><br></pre></td></tr></table></figure>
+
+<p>安装也有一个镜像拉取的过程，可能也会失败，多试几次吧，因为墙的存在没有什么比较好的解决办法，用<code>kubectl get pods --all-namespaces</code>命令，如果calico开头的两个pod的状态为running就说明安装好了。</p>
+<p>今天就到此结束吧，做事情倒是不累，有问题解决不掉，反复尝试各种方案是真的累。</p>
+<p>to be continue……</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Mr.Postgraduate
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhuqixing007.github.io/3912282315.html" title="搭建kubernetes学习环境03">https://zhuqixing007.github.io/3912282315.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/云原生/" rel="tag"># 云原生</a>
+          
+            <a href="/tags/虚拟化/" rel="tag"># 虚拟化</a>
+          
+            <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/3142631293.html" rel="next" title="搭建kubernetes学习环境02--ubuntu篇">
+                <i class="fa fa-chevron-left"></i> 搭建kubernetes学习环境02--ubuntu篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -334,6 +570,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -356,8 +599,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -443,6 +695,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#与集群交互"><span class="nav-number">1.</span> <span class="nav-text">与集群交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pod寻址"><span class="nav-number">2.</span> <span class="nav-text">Pod寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装calico"><span class="nav-number">3.</span> <span class="nav-text">安装calico</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -626,6 +894,10 @@ setInterval("createtime()",250);
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
