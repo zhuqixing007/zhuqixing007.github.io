@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="baidu-site-verification" content="jkBWrjcTce">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,前端,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Carpe Diem" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="A02问题修正在A02教程中有一个问题：配置好路由之后，点击链接，页面跳转，但是组件没有自动刷新，这里调整一下App.js中的代码，换掉了一个路由组件： 123456789101112131415import React from &quot;react&quot;;import &amp;#123; BrowserRouter as Router, Switch, Route&amp;#125; from &quot;react-route">
+<meta name="keywords" content="React,前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A04-零基础React博客项目-页面制作（1）">
+<meta property="og:url" content="https://zhuqixing007.github.io/856508268.html">
+<meta property="og:site_name" content="Carpe Diem">
+<meta property="og:description" content="A02问题修正在A02教程中有一个问题：配置好路由之后，点击链接，页面跳转，但是组件没有自动刷新，这里调整一下App.js中的代码，换掉了一个路由组件： 123456789101112131415import React from &quot;react&quot;;import &amp;#123; BrowserRouter as Router, Switch, Route&amp;#125; from &quot;react-route">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-24T14:04:28.729Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A04-零基础React博客项目-页面制作（1）">
+<meta name="twitter:description" content="A02问题修正在A02教程中有一个问题：配置好路由之后，点击链接，页面跳转，但是组件没有自动刷新，这里调整一下App.js中的代码，换掉了一个路由组件： 123456789101112131415import React from &quot;react&quot;;import &amp;#123; BrowserRouter as Router, Switch, Route&amp;#125; from &quot;react-route">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zhuqixing007.github.io/856508268.html">
+
+
+
+
+
+  <title>A04-零基础React博客项目-页面制作（1） | Carpe Diem</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/zhuqixing007" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Carpe Diem</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhuqixing007.github.io/856508268.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Postgraduate">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/imgs/personal_info/touxiang.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Carpe Diem">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">A04-零基础React博客项目-页面制作（1）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-23T18:11:38+08:00">
+                2020-08-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-24T22:04:28+08:00">
+                2020-08-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/A-React博客项目/" itemprop="url" rel="index">
+                    <span itemprop="name">A-React博客项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>&nbsp评论数:
+                </span>
+                <a href="/856508268.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/856508268.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/856508268.html" class="leancloud_visitors" data-flag-title="A04-零基础React博客项目-页面制作（1）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.8k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="A02问题修正"><a href="#A02问题修正" class="headerlink" title="A02问题修正"></a>A02问题修正</h1><p>在A02教程中有一个问题：配置好路由之后，点击链接，页面跳转，但是组件没有自动刷新，这里调整一下<code>App.js</code>中的代码，换掉了一个路由组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Switch, Route&#125; <span class="keyword">from</span> <span class="string">"react-router-dom"</span></span><br><span class="line"><span class="comment">// 将Router组件替换成了BrowserRouter组件，同时弃用history就可以正常跳转了</span></span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">"./pages/home/home"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">      &lt;Router&gt;</span><br><span class="line">        &lt;Switch&gt;</span><br><span class="line">          &lt;Route exact path=&#123;<span class="string">"/"</span>&#125; component=&#123;Home&#125;/&gt;</span><br><span class="line">        &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Router&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>新增内容：</p>
+<ul>
+<li>添加页面底部footer</li>
+<li>添加右上角github角标</li>
+<li>左侧导航和站点信息固定</li>
+<li>导航栏点击，页面跳转</li>
+<li>首页视图</li>
+</ul>
+<p>今日完整代码已上传：<a href="https://github.com/zhuqixing007/blog" target="_blank" rel="noopener">https://github.com/zhuqixing007/blog</a></p>
+<h1 id="底部footer"><a href="#底部footer" class="headerlink" title="底部footer"></a>底部footer</h1><p>将<code>template.js</code>中的右盒子（className为rightBox的div）里的代码修改如下，现阶段我们只做界面还没有涉及到数据，所以先用固定内容代替，一般习惯文字是要包裹在span或者p标签里的，div里一般不直接写文字：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;</span>"<span class="attr">content</span>"&#125; <span class="attr">style</span>=<span class="string">&#123;&#123;minHeight:</span> <span class="attr">0.95</span>*<span class="attr">this.state.height</span>&#125;&#125;&gt;</span></span><br><span class="line">  &#123;this.props.content&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;</span>"<span class="attr">footer</span>"&#125;&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;</span>"<span class="attr">copyright</span>"&#125;&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>© 2019 — 2020 <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>Mr.Postgraduate<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;</span>"<span class="attr">statistics</span>"&#125;&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>全站总字数: 13.7k <span class="tag">&lt;/<span class="name">span</span>&gt;</span>|</span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span> 访问量: 1582次 <span class="tag">&lt;/<span class="name">span</span>&gt;</span>|</span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span> 访客量: 510人<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>本站已安全运行 348 天<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>content盒子定义了最小盒子高度，这样就可以将footer挤到页面最下面了，如果不这样做，在只有一篇文章的页面，footer就会跑到上面去，不太美观，也不符合footer应该在的位置，下面是footer的样式没有新知识，都比较常规，就不做讲解了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.footer</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">padding-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(142,142,142);</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="github角标"><a href="#github角标" class="headerlink" title="github角标"></a>github角标</h1><p>github角标可以在下面的链接里选择你自己喜欢的角标样式：</p>
+<blockquote>
+<p><a href="https://tholman.com/github-corners/?spm=a2c4e.11153940.blogcont362865.19.7ad64508EPW4EO" target="_blank" rel="noopener">https://tholman.com/github-corners/?spm=a2c4e.11153940.blogcont362865.19.7ad64508EPW4EO</a></p>
+</blockquote>
+<p>这里我将github角标做成了一个github组件，首先在src文件夹下面创建extension文件夹，然后在extension内创建<code>github.js</code>和<code>github.css</code>。</p>
+<p>将链接里a标签粘贴到<code>github.js</code>，粘贴过来的代码在React中会报错，是因为里面的一些html代码跟React返回的html还是有点语法上的区别的，需要稍加调整，github角标只是一个扩展，不是重点，可以直接复制我这两个文件里的代码。</p>
+<p>然后是在<code>template.js</code>中调用这个组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先在头部应用组件</span></span><br><span class="line"><span class="keyword">import</span> Github <span class="keyword">from</span> <span class="string">"../extension/github"</span>;</span><br><span class="line"><span class="comment">// 接下来你可以在return的最外层div的任意位置插入这个组件，注意给link赋值</span></span><br><span class="line">&lt;Github link=&#123;<span class="string">"你的github地址"</span>&#125;/&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="固定导航栏和站点信息"><a href="#固定导航栏和站点信息" class="headerlink" title="固定导航栏和站点信息"></a>固定导航栏和站点信息</h1><p>这个只要给<code>template.css</code>左盒子添加固定定位就行了，默认位置是在左上角:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.leftBox</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>固定定位之后，该元素就脱离了文档流，它原本的位置会被其他元素占据，因此右盒子会跑过来，导致两个元素重叠，这是我们只要给右盒子的margin-tight加点距离就好了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.rightBox</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">210px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h1><p>我们先创建各页面的组件，在src/pages下创建各个页面的文件夹，文件内有个组件的js文件和css文件，参考A02教程<code>home.js</code>中调用的模版组件的方式，实现各页面的创建和模版组件的调用。接下来在 <code>App.js</code>中定义路由：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Router</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Switch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">&#123;</span>"/"&#125; <span class="attr">component</span>=<span class="string">&#123;Home&#125;/</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&#123;</span>"/<span class="attr">categories</span>"&#125; <span class="attr">component</span>=<span class="string">&#123;Categories&#125;/</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&#123;</span>"/<span class="attr">archives</span>"&#125; <span class="attr">component</span>=<span class="string">&#123;Archives&#125;/</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&#123;</span>"/<span class="attr">tags</span>"&#125; <span class="attr">component</span>=<span class="string">&#123;Tags&#125;/</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&#123;</span>"/<span class="attr">about</span>"&#125; <span class="attr">component</span>=<span class="string">&#123;About&#125;/</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Switch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Router</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后去<code>template.js</code>给导航ul标签里的li加上Link实现页面跳转，Link从<code>react-dom-router</code>引入，以首页为例，style样式是去掉链接的下划线，to里面的pathname是跳转的地址：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link style=&#123;&#123;<span class="attr">textDecoration</span>: <span class="string">"none"</span>&#125;&#125; to=&#123;&#123;<span class="attr">pathname</span>: <span class="string">"/"</span>&#125;&#125;&gt;</span><br><span class="line">	&lt;li className=&#123;<span class="string">"nav-li"</span>&#125;&gt;</span><br><span class="line">		&lt;span className=&#123;<span class="string">"nav-icon"</span>&#125;&gt;<span class="xml"><span class="tag">&lt;<span class="name">HomeOutlined</span> /&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">		&lt;span className=&#123;<span class="string">"nav-text"</span>&#125;&gt;首页&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">		&lt;span className=&#123;"nav-cur"&#125;&gt;&lt;/</span>span&gt;</span><br><span class="line">	&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>Link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>给所有的li标签都套上Link并设置目标之后就可以实现链接跳转了，自己在浏览器尝试吧，点击的时候可以看到浏览器地址栏的链接发生了变化。</p>
+<p>下面来实现如何标记当前所在的页面，要标记当前页面就要让模版组件知道是哪一个组件在调用它，因此我们在各个页面调用模版组件的时候，传递一个表示当前页面的标记，以home为例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Template</span> <span class="attr">curPage</span>=<span class="string">&#123;</span>"<span class="attr">home</span>"&#125;/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面实现链接跳转的时候我们增加了一个span，className为nav-cur，按照下面代码在<code>template.css</code>中定义样式，这样每个导航栏标签后面就会出现一个小点，我们通过<code>display:none</code>默认将这个点隐藏，并且在当前的页面显示对应的点标记页面：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.nav-cur</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute; <span class="comment">/*子元素用绝对定位，别忘了在父元素用相对定位，否则无效*/</span></span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>; <span class="comment">/*top和margin-top结合使用，可以实现元素的垂直居中*/</span></span><br><span class="line">    <span class="attribute">right</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">3px</span>; <span class="comment">/*高度一半的负值*/</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(179,178,179);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在模版组件中，通过props来获取父组件传递的参数，同时我们通过document中按className查找的方法定位到导航栏的li和nav-cur对应的span，然后通过父组件传递过来的不同值来给不同标签加背景色和显示不同标签上的点来表示当前处于哪个页面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> curPage = <span class="keyword">this</span>.props.curPage;</span><br><span class="line"><span class="keyword">const</span> navs = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"nav-li"</span>);</span><br><span class="line"><span class="keyword">const</span> curPointers = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"nav-cur"</span>);</span><br><span class="line"><span class="keyword">switch</span> (curPage) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"home"</span>: navs[<span class="number">0</span>].style.backgroundColor=<span class="string">"rgb(248,248,248)"</span>;</span><br><span class="line">  	          	 curPointers[<span class="number">0</span>].style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">    	         	 <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"categories"</span>: navs[<span class="number">1</span>].style.backgroundColor=<span class="string">"rgb(248,248,248)"</span>;</span><br><span class="line">  	          	       curPointers[<span class="number">1</span>].style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">    	          	     <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"archives"</span>: navs[<span class="number">2</span>].style.backgroundColor=<span class="string">"rgb(248,248,248)"</span>;</span><br><span class="line">              	   	 curPointers[<span class="number">2</span>].style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">                 		 <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"tags"</span>: navs[<span class="number">3</span>].style.backgroundColor=<span class="string">"rgb(248,248,248)"</span>;</span><br><span class="line">                 curPointers[<span class="number">3</span>].style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"about"</span>: navs[<span class="number">4</span>].style.backgroundColor=<span class="string">"rgb(248,248,248)"</span>;</span><br><span class="line">              	  curPointers[<span class="number">4</span>].style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="首页视图"><a href="#首页视图" class="headerlink" title="首页视图"></a>首页视图</h1><p>首页就是文章概况的展示页面，由文章概况和分页栏组成，并且这应该是在<code>home.js</code>中定义的，然后将这部分内容传递到模版组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> content = (</span><br><span class="line">			&lt;div style=&#123;&#123;<span class="attr">width</span>: <span class="string">"100%"</span>, <span class="attr">height</span>: <span class="string">"100%"</span>&#125;&#125;&gt;</span><br><span class="line">				&lt;div className=&#123;<span class="string">"articles"</span>&#125;&gt;</span><br><span class="line">					&lt;ul&gt;</span><br><span class="line">						&lt;li&gt;</span><br><span class="line">							&lt;div className=&#123;<span class="string">"article-title"</span>&#125;&gt;</span><br><span class="line">								&lt;span&gt;A03-零基础React博客项目-制作导航栏和站点概览&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">							&lt;/</span>div&gt;</span><br><span class="line">							&lt;div className=&#123;<span class="string">"article-info"</span>&#125;&gt;</span><br><span class="line">							发表于 <span class="number">2020</span><span class="number">-08</span><span class="number">-20</span> |  更新于: <span class="number">2020</span><span class="number">-08</span><span class="number">-20</span> |  分类于 A-React博客项目 |  评论数: <span class="number">0</span> |  阅读次数: <span class="number">9</span> |  字数统计: <span class="number">2.4</span>k</span><br><span class="line">							&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">							&lt;div className=&#123;"article-brief"&#125;&gt;</span></span><br><span class="line"><span class="regexp">							&lt;p&gt;今日总览今天实现了：1. 页面尺寸跟随浏览器窗口大小自适应，2.导航栏标签，3. 站点概览标签。效果图如下 从本教程开始，我不会将完整的代码展示出来，我只会讲解每次改动的代码，如果想要参考完整的代码可以访问这个链接：https:/</span><span class="regexp">/github.com/</span>zhuqixing007/blog 页面尺寸 ...&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">							&lt;/</span>div&gt;</span><br><span class="line">							&lt;div className=&#123;<span class="string">"article-more"</span>&#125;&gt;<span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>阅读全文<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">						&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">						&lt;li&gt;article2&lt;/</span>li&gt;</span><br><span class="line">					&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">				&lt;div className=&#123;<span class="string">"pages"</span>&#125;&gt;</span><br><span class="line">					&lt;span className=&#123;<span class="string">"pre"</span>&#125;&gt;&#123;<span class="string">"&lt;"</span>&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;ul&gt;</span></span><br><span class="line"><span class="regexp">						&lt;li&gt;1&lt;/</span>li&gt;</span><br><span class="line">						&lt;li&gt;<span class="number">2</span>&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">						&lt;li&gt;...&lt;/</span>li&gt;</span><br><span class="line">						&lt;li&gt;<span class="number">4</span>&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/u</span>l&gt;</span><br><span class="line">					&lt;span className=&#123;<span class="string">"next"</span>&#125;&gt;&#123;<span class="string">"&gt;"</span>&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">			&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+
+<p>调用的时候传递content，可以回头看看底部footer制作里的代码，通过{this.props.content}实现了将content填充到模版组件中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Template</span> <span class="attr">curPage</span>=<span class="string">&#123;</span>"<span class="attr">home</span>"&#125; <span class="attr">content</span>=<span class="string">&#123;content&#125;/</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是home中content的css样式，关键地方做了一点注释：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.articles</span>&gt;<span class="selector-tag">ul</span>&gt;<span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">94%</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">3%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(255,255,255);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-title</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">28px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-title</span>&gt;<span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>:relative;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(75,75,75);</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-title</span>&gt;<span class="selector-tag">span</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">   <span class="comment">/*after是伪元素，通过after我们实现了鼠标移动到文章标题的时候，下划线从中间出发，向两边延伸*/</span></span><br><span class="line">    <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">    <span class="attribute">position</span>:absolute</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-title</span>&gt;<span class="selector-tag">span</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    border-bottom:2px solid rgb(75,75,75);;</span><br><span class="line">    <span class="selector-tag">left</span><span class="selector-pseudo">:51</span>%;</span><br><span class="line">    <span class="selector-tag">right</span><span class="selector-pseudo">:51</span>%;</span><br><span class="line">    <span class="comment">/*通过定位将伪元素移动到中间*/</span></span><br><span class="line">    <span class="selector-tag">bottom</span><span class="selector-pseudo">:0</span>;</span><br><span class="line">    <span class="selector-tag">transition</span>: 0<span class="selector-class">.2s</span> <span class="selector-tag">all</span>; <span class="comment">/*发生在该元素上的所有变化呈现过渡效果，过渡时间为0.2秒*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-title</span>&gt;<span class="selector-tag">span</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="comment">/*鼠标悬浮时下划线线两边延伸*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-info</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">13px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(148,148,148);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-brief</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-brief</span>&gt;<span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">align-self</span>: center;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(88,88,88);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-more</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-more</span>&gt;<span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex; <span class="comment">/*父元素display为flex，子元素设置align-self: center可实现垂直居中*/</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(75,75,75);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="built_in">rgb</span>(75,75,75);</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">0.2s</span> linear all;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-more</span>&gt;<span class="selector-tag">p</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(253,253,253);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(75,75,75);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.article-more</span>&gt;<span class="selector-tag">p</span>&gt;<span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">align-self</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(255,255,255);</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span>&gt;<span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span>&gt;<span class="selector-tag">ul</span>&gt;<span class="selector-tag">li</span>, <span class="selector-class">.pre</span>, <span class="selector-class">.next</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(88,88,88);</span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">2px</span> solid <span class="built_in">rgb</span>(235,235,235);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span>&gt;<span class="selector-tag">ul</span>&gt;<span class="selector-tag">li</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(252,252,252);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(197,197,197);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>今日工作完成，可在浏览器回顾所有效果。</p>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>现在你可能觉得我贴的代码很多，一时间不知道如何下手写，或者从哪里看，其实代码不重要，你应该更加关注我在贴代码之前或者之后写的思路，你可能会一行一行的看我的代码或者自己一行一行的写代码，这是一种错误的编程方式。</p>
+<p>编程的应该是结构入手的，由表及里，不是自上而下，比如我们如果要实现一个div里面再去嵌套一个div，正确的做法应该是想将外层div写好，然后去外层div里面写内层div，即先写<code>&lt;div&gt;&lt;/div&gt;</code>，然后把这个div打开，去写第二层div，而按照这样的顺序：<code>&lt;div&gt;</code>➡️<code>&lt;div&gt;</code>➡️<code>&lt;/div&gt;</code>➡️<code>&lt;/div&gt;</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Mr.Postgraduate
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://zhuqixing007.github.io/856508268.html" title="A04-零基础React博客项目-页面制作（1）">https://zhuqixing007.github.io/856508268.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2094812184.html" rel="next" title="A03-零基础React博客项目-制作导航栏和站点概览">
+                <i class="fa fa-chevron-left"></i> A03-零基础React博客项目-制作导航栏和站点概览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/imgs/personal_info/touxiang.jpeg" alt="Mr.Postgraduate">
+            
+              <p class="site-author-name" itemprop="name">Mr.Postgraduate</p>
+              <p class="site-description motion-element" itemprop="description">往事不要再提，人生已多风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="280" height="86" src="//music.163.com/outchain/player?type=2&id=3411353&auto=1&height=66"></iframe>
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhuqixing007" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhuqixing123@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A02问题修正"><span class="nav-number">1.</span> <span class="nav-text">A02问题修正</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#底部footer"><span class="nav-number">2.</span> <span class="nav-text">底部footer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#github角标"><span class="nav-number">3.</span> <span class="nav-text">github角标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#固定导航栏和站点信息"><span class="nav-number">4.</span> <span class="nav-text">固定导航栏和站点信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面跳转"><span class="nav-number">5.</span> <span class="nav-text">页面跳转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#首页视图"><span class="nav-number">6.</span> <span class="nav-text">首页视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题外话"><span class="nav-number">7.</span> <span class="nav-text">题外话</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <center>
+<div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Postgraduate</span>
+</div>
+
+
+
+
+
+
+
+
+  <span class="post-meta-item-icon">
+    <i class="fa fa-area-chart"></i>
+  </span>
+  
+    <span>全站总字数: </span>
+  
+  <span title="Site words total count">16.5k</span>
+
+<span class="post-meta-divider">|</span>
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-eye"></i>访问量: <span id="busuanzi_value_site_pv"></span>次
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-user"></i>访客量: <span id="busuanzi_value_site_uv"></span>人
+
+
+
+<!-- 网站运行时间的设置 -->
+<br>
+<span id="timeDate"></span>
+<span id="times"></span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("09/10/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+</center>
+
+        
+<div class="busuanzi-count">
+  <script async src="“https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js”"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'oohsA6f6RNalBvVVpyhumXF0-gzGzoHsz',
+        appKey: 'ApOTYtuwVtiBryn7ptk59qvW',
+        placeholder: 'say somthing...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("oohsA6f6RNalBvVVpyhumXF0-gzGzoHsz", "ApOTYtuwVtiBryn7ptk59qvW");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":180,"height":360},"mobile":{"show":false},"react":{"opacityDefault":1,"opacityOnHover":1},"log":false,"tagMode":false});</script></body>
+</html>
