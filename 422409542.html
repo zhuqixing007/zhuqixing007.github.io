@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://zhuqixing007.github.io/imgs/A06-2.png">
 <meta property="og:image" content="https://zhuqixing007.github.io/imgs/A06-3.png">
 <meta property="og:image" content="https://zhuqixing007.github.io/imgs/A06-4.png">
-<meta property="og:updated_time" content="2020-10-07T05:53:59.910Z">
+<meta property="og:updated_time" content="2020-10-07T06:06:04.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A06-零基础React博客项目-后台数据库建表（MySQL）">
 <meta name="twitter:description" content="前言本期讲解后台数据库相关内容，数据库作为数据存储的仓库，在任何项目中都是必不可少的，当下最流行的数据库就是MySQL了，所以本博客项目也用MySQL做数据存储。下面是MySQL winsows版的安装包，安装过程全程默认选项就好了：  链接: https://pan.baidu.com/s/1xI6_KzVADxYifz0cHLvJ0Q  密码: fu1r  数据库设计首先，用下面的命令创建并切">
@@ -350,7 +350,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-07T13:53:59+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-07T14:06:04+08:00">
                 2020-10-07
               </time>
             
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  873
+                  1.1k
                 </span>
               
 
@@ -488,6 +488,7 @@
 <p>下面的代码是分别建立这五张表的步骤：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># articles表</span><br><span class="line">create table articles(id int primary key auto_increment, title varchar(30) not null, date datetime not null, read_times int default 0, body varchar(10000) not null);</span><br><span class="line"></span><br><span class="line"># categories表</span><br><span class="line">create table categories(id int primary key auto_increment, category varchar(15) not null);</span><br><span class="line"></span><br><span class="line"># comments表</span><br><span class="line">create table comments(id int primary key auto_increment, name varchar(15) not null, contact varchar(30) not null, comment varchar(200) not null);</span><br><span class="line"></span><br><span class="line"># tags表</span><br><span class="line">create table tags(id int primary key auto_increment,tag varchar(10) not null)</span><br><span class="line"></span><br><span class="line"># 下面建立的表是将articles表与其他表分别建立联系</span><br><span class="line">create table art_cate(id int primary key auto_increment, art_id int not null,cate_id not null);</span><br><span class="line"></span><br><span class="line">create table art_com(id int primary key auto_increment, art_id int not null,com_id int not null);</span><br><span class="line"></span><br><span class="line">create table art_tag(id int primary key auto_increment, art_id int not null,tag_id int not null);</span><br><span class="line"></span><br><span class="line"># 接下来对上面的三张表分别建立约束</span><br><span class="line">alter table art_cate add constraint art_fk1 forgien key(art_id) reference articles(id);</span><br><span class="line">alter table art_cate add constraint cate_fk1 foreign key(cate_id) references categories(id);</span><br><span class="line"></span><br><span class="line">alter table art_com add constraint atr_fk2 foreign key(art_id) references articles(id);</span><br><span class="line">alter table art_com add constraint com_fk1 foreign key(com_id) references comments(id);</span><br><span class="line"></span><br><span class="line">alter table art_tag add constraint art_fk3 foreign key(art_id) references articles(id);</span><br><span class="line">alter table art_tag add constraint tag_fk1 foreign key(tag_id) references tags(id);</span><br></pre></td></tr></table></figure>
 
+<p>细心的你一定能够发现每张表在建立的时候都有一个没有任何实际含义的id字段，并且id字段设置成了数值自动增长的主键，这是因为主键确保了这一行数据在这张表的唯一性，你可以尝试插入一条数据在删除这条数据，接着再插入一条数据，你可以看到新插入数据的id并不会和之前删除的数据id相同，因为MySQL不会再使用用过的主键id，即使他已经被删除了，这就有效的保证了数据在全表的唯一性，并且我们在关联两张表的时候也是通过id进行关联的。</p>
 <p>到这里表结构就设计完成了，下面的截图是每张表的结构以及对应的约束：</p>
 <p><img src="imgs/A06-1.png" alt></p>
 <p><img src="imgs/A06-2.png" alt></p>
@@ -770,7 +771,7 @@
   
     <span>全站总字数: </span>
   
-  <span title="Site words total count">18.2k</span>
+  <span title="Site words total count">18.4k</span>
 
 <span class="post-meta-divider">|</span>
 
